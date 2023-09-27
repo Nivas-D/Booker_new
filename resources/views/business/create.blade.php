@@ -19,7 +19,7 @@
                                     @csrf
                                     <div class="form-group {{ $errors->has('name') ? ' has-danger' : '' }} ">
                                         <label class="form-control-label" for="name">Login société (partie de l'URL, ne peut être modifié)</label>
-                                        <input class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" type="text" name="name" value="{{ old('name') }}"  autofocus>
+                                        <input class="form-control" placeholder="" type="text" name="name" value="{{ old('name') }}"  autofocus>
                                         @error('name')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -28,7 +28,7 @@
 
                                     <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="email">{{ __('Email') }}</label>
-                                        <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('') }}" type="text" name="email" value="{{ old('email') }}"  autofocus>
+                                        <input class="form-control" placeholder="{{ __('') }}" type="text" name="email" value="{{ old('email') }}"  autofocus>
                                         @error('email')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -78,10 +78,12 @@
 
                                    
                                     <div class="form-group">
-                                        <label for="image">J'accepte les modalités</label>
                                         <div class="toggle">
-                                            <input type="checkbox" name = "status" checked/>
-                                            <label></label>
+                                            <input type="checkbox" name ="status" {{ old('status') ? 'checked' : '' }}/>
+                                            <label>J'accepte les modalités</label>
+                                            @error('status')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
 
@@ -89,7 +91,6 @@
 
                                     <div class="text-center" id="createCategory">
                                         <input type="submit" class="btn btn-primary btn-block my-5" value="{{ __('S’inscrire maintenant') }}">
-                                        
                                     </div>
                                 </form>
                         </div>
@@ -99,48 +100,6 @@
         </div>
     </section>
     
-
-
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script> -->
-
 <script>
-    // $(document).ready(function() {
-
-
-
-    //     $(document).find('#business_form').validate({
-
-
-    //   rules:{
-    //     'name':
-    //     {
-    //       required:true,
-    //     },
-
-
-    //     'category_id':
-    //     {
-    //       required:true,
-    //       validAge: true
-    //     },
-
-    //   },
-    //   messages:{
-    //     'name':
-    //     {
-    //       'required':' Name is Required.'
-    //     },
-
-    //     'category_id':
-    //     {
-    //       'required':'Category is Required.'
-    //     },
-
-    //   },
-    // });
-
-
-    // });
 </script>
 @endsection

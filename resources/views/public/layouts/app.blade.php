@@ -44,13 +44,13 @@
 
     <!-- Font Awesome -->
     <link href="{{asset('css/mdb-min.css')}}" rel="stylesheet" />
-    <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
+    <!-- <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script> -->
 
     <!-- Main Css -->
     <link href="{{asset('css/colors/purple.css')}}" rel="stylesheet" id="color-opt">
-    <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css" id="theme-opt" />
     <link href="{{asset('css/custom.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/testimonial.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css" id="theme-opt" />
     <style>
 
 @media screen and (max-width: 992px) {
@@ -253,10 +253,15 @@ input.qtyminus { width:25px; height:25px;}
 
        $email = null;
        }
-
-    //dd($email);
     ?>
    <header>
+    @if(session('success'))
+        <div class="alert alert-success" id="successMessage">
+            {{ session('success') }}
+        </div>
+    @endif
+
+
         <div class="container">
             <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3">
                 <div class="col-md-1 mb-2 mb-md-0">
@@ -268,11 +273,12 @@ input.qtyminus { width:25px; height:25px;}
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="#" class="nav-link px-3 ">{{ __('translation::menu.about') }}</a></li>
                     <li><a href="{{route('public.categories')}}"  class="nav-link px-3  @if($page == 'industries')link-secondary @endif">Industries</a></li>
-                    <li><a href="#" class="nav-link px-3">{{ __('translation::menu.business') }}</a></li>
+                    <li><a href="{{ route('business.index') }}" class="nav-link px-3 @if($page == 'business')link-secondary @endif">{{ __('translation::menu.business') }}</a></li>
                 </ul>
                 @if(\Auth::check())
                 <div class="col-md-3 text-end">
-                    <h4>Welcome, {{\Auth::user()->first_name}}</h4>
+                    <h5>Welcome, 
+                        <a href="{{ route('user/dashboard') }}" >{{Auth::user()->first_name}} {{Auth::user()->last_name}}</a></h5>
 
                 </div>
                 @else
@@ -728,6 +734,10 @@ $(document).ready(function(){
 </script>
 
     <script>
+        $(document).ready(function(){
+             $("#successMessage").delay(5000).slideUp(300);
+
+        });
         function checkValidEmail(email){
 
             console.log(email);
@@ -829,5 +839,6 @@ $(document).ready(function(){
 
         }
     </script>
+
 </body>
 </html>

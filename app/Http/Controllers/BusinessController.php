@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Business;
 use Validator;
+use Mail;
+use App\Mail\BusinessRegister;
 
 class BusinessController extends Controller
 {
@@ -18,8 +20,8 @@ class BusinessController extends Controller
     public function index()
     {
         // $Category = Category :: get();
-        $categories = Category::orderBy('id', 'desc')->get();   
-        return view('business.create',compact('categories'));
+        $categories = Category::orderBy("id", "desc")->get();
+        return view("business.create", compact("categories"));
     }
 
     /**
@@ -42,39 +44,51 @@ class BusinessController extends Controller
     {
         //
         // $last_inserted_id = Category::insertGetId($data);
-            $error = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'telephone' => 'required',
-            'category_id' => 'required',
-            'company_name' => 'required',
-            //'email' => 'required|email',
-            // Other validation rules
-        ], [
-            'name.required' => 'Please fill out the Name field.',
-            'email.required' => 'Please fill out the Email field.',
-            'email.email' => 'Please enter a valid email address.',
-            'telephone.required' => 'Please fill out the Telephone field.',
-            'category_id.required' => 'Please fill out the Category field.',
-            'company_name.required' => 'Please fill out the Company field.',
+        $error = $request->validate(
+            [
+                "name" => "required",
+                "email" => "required|email",
+                "telephone" => "required",
+                "category_id" => "required",
+                "company_name" => "required",
+                "status"=>"required"
+                //'email' => 'required|email',
+                // Other validation rules
+            ],
+            [
+                "name.required" => "Please fill out the Name field.",
+                "email.required" => "Please fill out the Email field.",
+                "email.email" => "Please enter a valid email address.",
+                "telephone.required" => "Please fill out the Telephone field.",
+                "category_id.required" => "Please fill out the Category field.",
+                "company_name.required" => "Please fill out the Company field.",
+                "status.required" => "Please check out the checkbox.",
 
-            // Custom messages for other rules
-        ]);
-            // if($error){
+                // Custom messages for other rules
+            ]
+        );
+        // if($error){
         $data = [
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'telephone' => $request->input('telephone'),
-            'address' => $request->input('address'),
-            'category_id' => $request->input('category_id'),
-            'company_name' => $request->input('company_name'),
-            'description' => $request->input('description'),
+            "name" => $request->input("name"),
+            "email" => $request->input("email"),
+            "telephone" => $request->input("telephone"),
+            "address" => $request->input("address"),
+            "category_id" => $request->input("category_id"),
+            "company_name" => $request->input("company_name"),
+            "description" => $request->input("description"),
+        ];
+        $mailData = [
+            "name" => $request->input("company_name"),
+            "title" => "Business Registration Notification",
         ];
 
-                Business::create($data);
-            // }
         
-        return redirect()->route('business.index');  
+
+        Business::create($data);
+        $isEmailed = Mail::to($request->input("email"))->send(
+            new BusinessRegister($mailData)
+        );
+        return redirect()->route("public.home")->with('success', 'Business Registered successfully');
     }
 
     /**
