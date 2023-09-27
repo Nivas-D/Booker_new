@@ -126,9 +126,11 @@ class ServiceController extends Controller {
 
 
     public function getServiceBookings(){
+        //category_id,
         $bookings = DB::table('service_bookings')->orderby('created_at', 'desc')
             ->leftjoin('services', 'services.id', '=', 'service_bookings.service_id')
-            ->select('service_bookings.*', 'services.name as service_name', 'services.image as service_image')->get();
+            ->leftjoin('users', 'users.id', '=', 'service_bookings.user_id')
+            ->select('service_bookings.*', 'services.name as service_name', 'services.image as service_image','users.name as user_name')->get();
         return view('admin.services.bookings', compact('bookings'));
     }
 

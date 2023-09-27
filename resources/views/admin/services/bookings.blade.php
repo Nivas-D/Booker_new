@@ -36,19 +36,30 @@
                                         <th scope="col">{{ __('Sr.') }}</th>
                                         <th scope="col">{{ __('Service') }}</th>
                                         <th scope="col">{{ __('Type') }}</th>
+                                        <th scope="col">{{ __('Client') }}</th>
                                         <th scope="col">{{ __('Amount') }}</th>
-                                        <th scope="col">{{ __('Status') }}</th>
+                                        <th scope="col">{{ __('Payment') }}</th> 
+                                        <th scope="col">{{ __('Payment Status') }}</th>
+                                        <th scope="col">{{ __('Booking Status') }}</th>
+                                        <th scope="col">{{ __('Date') }}</th>
                                          {{-- <th scope="col" class=""><span class="float-right mr-2">Actions</span></th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($bookings as $booking)
+                                    
                                         <tr>
                                             <td class="text-primary">{{ $loop->iteration }}</td>
                                             <td class="text-primary">{{ ucwords($booking->service_name) }}</td>
                                             <td class="text-primary">{{ ucwords($booking->type) }}</td>
+                                            <td class="text-primary">{{ ucwords($booking->user_name) }}</td>
                                             <td class="text-primary">{{ $booking->amount }} CHF</td>
+                                            <td class="text-primary">{{ $booking->payment_method }}</td>
+                                            <td class="text-primary">
+                                                <span  class="p-1 {{ in_array(strtolower($booking->payment_status), ['success', 'paid']) ? 'alert-success' : (in_array(strtolower($booking->payment_status), ['unsuccess', 'unpaid']) ? 'alert-danger' : 'alert-info') }}">{{ ucwords($booking->payment_status) }}</span>
+                                            </td>
                                             <td class="text-primary">{{ ucwords($booking->booking_status) }}</td>
+                                            <td class="text-primary">{{ date('m/d/Y',strtotime($booking->created_at)) }}</td>
                                             <td>
                                               {{--  <span class="float-right">
                                                     <a class="btn btn-sm btn-neutral" href="{{ route('admin.service.bookings.show', ['id' => $booking->id]) }}">

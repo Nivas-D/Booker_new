@@ -9,6 +9,6 @@ class ProductOrder extends Model {
     'products' => 'array', // Will convarted to (Array)
     'payment_details' => 'array', // Will convarted to (Array)
 ];
-    protected $fillable = ['user_id', 'products', 'quantity', 'amount', 'order_status','delivery_address','payment_status','payment_method','payment_details','created_at','updated_at'];
+    protected $fillable = ['user_id', 'products','product_id', 'quantity', 'amount', 'order_status','delivery_address','payment_status','payment_method','payment_details','created_at','updated_at'];
     
 }
