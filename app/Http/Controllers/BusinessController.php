@@ -1,0 +1,124 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Business;
+use Validator;
+
+class BusinessController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        // $Category = Category :: get();
+        $categories = Category::orderBy('id', 'desc')->get();   
+        return view('business.create',compact('categories'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+        // $last_inserted_id = Category::insertGetId($data);
+            $error = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'telephone' => 'required',
+            'category_id' => 'required',
+            'company_name' => 'required',
+            //'email' => 'required|email',
+            // Other validation rules
+        ], [
+            'name.required' => 'Please fill out the Name field.',
+            'email.required' => 'Please fill out the Email field.',
+            'email.email' => 'Please enter a valid email address.',
+            'telephone.required' => 'Please fill out the Telephone field.',
+            'category_id.required' => 'Please fill out the Category field.',
+            'company_name.required' => 'Please fill out the Company field.',
+
+            // Custom messages for other rules
+        ]);
+            // if($error){
+        $data = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'telephone' => $request->input('telephone'),
+            'address' => $request->input('address'),
+            'category_id' => $request->input('category_id'),
+            'company_name' => $request->input('company_name'),
+            'description' => $request->input('description'),
+        ];
+
+                Business::create($data);
+            // }
+        
+        return redirect()->route('business.index');  
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(User $user)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, User $user)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(User $user)
+    {
+        //
+    }
+}
