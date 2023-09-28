@@ -145,10 +145,12 @@ class ProductController extends Controller {
             $searchText = $request->input('searchProductOrders');            
             $orders = DB::table('product_orders')->where('products.name', 'LIKE',"%{$searchText}%")->orWhere('product_orders.quantity', 'LIKE',"%{$searchText}%")->orWhere('product_orders.amount', 'LIKE',"%{$searchText}%")->orWhere('product_orders.order_status', 'LIKE',"%{$searchText}%")->orderby($orderByValue,$orderBy)
             ->join('products', 'products.id', '=', 'product_orders.product_id')
-            ->select('product_orders.*', 'products.name as product_name', 'products.image as product_image')->get();
+            ->leftjoin('users', 'users.id', '=', 'product_orders.user_id')
+            ->select('product_orders.*', 'products.name as product_name', 'products.image as product_image','users.name as user_name')->get();
         }else{
             $orders = DB::table('product_orders')->orderby($orderByValue,$orderBy)
             ->join('products', 'products.id', '=', 'product_orders.product_id')
+            ->leftjoin('users', 'users.id', '=', 'product_orders.user_id')
             ->select('product_orders.*', 'products.name as product_name', 'products.image as product_image')->get();    
         }                                
         return view('admin.products.orders', compact('orders','searchText','orderByValue','orderBy','orderByOpp'));

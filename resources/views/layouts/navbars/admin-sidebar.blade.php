@@ -30,6 +30,12 @@
                             <span class="nav-link-text">{{ __('Industries') }}</span>
                         </a>
                     </li>
+                    <li class="nav-item {{ $parentSection == 'business' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin.business.index') }}">
+                            <i class="ni ni-building text-primary"></i>
+                            <span class="nav-link-text">{{ __('Business') }}</span>
+                        </a>
+                    </li>
                     <li class="nav-item {{ $parentSection == 'products' ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('products.index') }}">
                             <i class="ni ni-books text-primary"></i>

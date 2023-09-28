@@ -49,6 +49,9 @@ Route::post('check-valid-email', [PageController::class, 'check_valid_email'])->
 Route::post('send-resetpassword-email', [PageController::class, 'send_resetpassword_email'])->name('send-resetpassword-email');
 Route::get('reset-password-email/{id}', [PageController::class, 'reset_password_email'])->name('reset-password-email');
 Route::post('reset-password-ajax', [PageController::class, 'reset_password_ajax'])->name('reset_password_ajax');
+Route::resource('business', BusinessController::class)->names([
+    'index' => 'business.index',
+]);
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
@@ -60,7 +63,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 });
 
-Route::resource('business', BusinessController::class);
+
 
 
 Route::group(config('translation.route_group_config') + ['namespace' => 'JoeDixon\\Translation\\Http\\Controllers'], function ($router) {
@@ -87,6 +90,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('admin/industries', IndustryController::class);
     Route::post('admin/industries', [IndustryController::class, 'index'])->name('industries.index');
     Route::post('admin/industries/store', [IndustryController::class, 'store'])->name('industries.store');
+    Route::resource('admin/business',  App\Http\Controllers\admin\BusinessController::class)->names([
+        'index' => 'admin.business.index',
+    ]);;
+    Route::post('admin/business', [App\Http\Controllers\admin\BusinessController::class, 'index'])->name('admin.business.index');
     Route::resource('admin/products', ProductController::class);
     Route::post('admin/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('admin/product/orders', [App\Http\Controllers\Admin\ProductController::class, 'getProductOrders' ])->name('admin.product.orders');

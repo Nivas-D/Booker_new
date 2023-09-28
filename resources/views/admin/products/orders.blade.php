@@ -51,10 +51,16 @@
                                     </form>
                                     <tr>
                                         <th scope="col">{{ __('Sr.') }}</th>
+                                        <th scope="col">{{ __('Date') }}<i onclick="sortProductOrder('products.created_at','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
                                         <th scope="col">{{ __('Product') }} <i onclick="sortProductOrder('products.name','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
                                         <th scope="col">{{ __('Quantity') }} <i onclick="sortProductOrder('product_orders.quantity','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
                                         <th scope="col">{{ __('Amount') }} <i onclick="sortProductOrder('product_orders.amount','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
-                                        <th scope="col">{{ __('Status') }} <i onclick="sortProductOrder('product_orders.order_status','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Client') }} <i onclick="sortProductOrder('users.name','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Method') }} <i onclick="sortProductOrder('product_orders.payment_method','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Payment Status') }} <i onclick="sortProductOrder('product_orders.payment_status','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Order Status') }} <i onclick="sortProductOrder('product_orders.order_status','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+
+                                        <!-- <th scope="col">{{ __('Status') }} <i onclick="sortProductOrder('product_orders.order_status','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th> -->
                                         <th scope="col" class=""><span class="float-right mr-2">Actions</span></th>
                                     </tr>
                                 </thead>
@@ -62,10 +68,17 @@
                                     @foreach ($orders as $order)
                                         <tr>
                                             <td class="text-primary">{{ $loop->iteration }}</td>
+                                            <td class="text-primary">{{ date('m/d/Y',strtotime($order->created_at)) }}</td>
                                             <td class="text-primary">{{ ucwords($order->product_name) }}</td>
                                             <td class="text-primary">{{ $order->quantity }}</td>
                                             <td class="text-primary">{{ $order->amount }} CHF</td>
-                                            <td class="text-primary">{{ ucwords($order->order_status) }}</td>
+                                            <td class="text-primary">{{ ucwords($order->user_name) }}</td>
+                                            <td class="text-primary">{{ $order->payment_method }}</td>
+                                            <td class="text-primary">
+                                            <span  class="p-1 {{ in_array(strtolower($order->payment_status), ['success', 'paid']) ? 'alert-success' : (in_array(strtolower($order->payment_status), ['unpaid','failed']) ? 'alert-danger' : 'alert-info') }}">{{ ucwords($order->payment_status) }}</span></td>
+                                            <td class="text-primary">
+                                            <span  class="p-1 {{ in_array(strtolower($order->payment_status), ['success', 'paid']) ? 'alert-success' : (in_array(strtolower($order->payment_status), ['pending', 'unpaid','failed']) ? 'alert-info' : 'alert-danger') }}">{{ ucwords($order->order_status) }}</span>
+                                            </td>
                                                 <td class="">
                                                     <span class="float-right">
                                                         <a class="btn btn-sm btn-neutral" href="{{ route('admin.product.orders.show', ['id' => $order->id]) }}">
