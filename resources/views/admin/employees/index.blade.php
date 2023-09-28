@@ -31,14 +31,31 @@
             <div class="col-md-12">
                 <div class="card border-0">
                     <div class="card-body">
+                        <form action="{{ route('admin.employees.index') }}" method="POST" id="employees-index">
+                            @csrf
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6"></div> 
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="search">
+                                        <input type="text" class="search-input form-control" placeholder="Search By Dept/Name/Email" name="searchEmployees" value="{{ $searchText }}">
+                                    </div>                                                                                                                            
+                                </div>                                        
+                            </div>
+                        </form>
                         <div class="table-responsive py-4" id="categories-table">
                             <table class="table align-items-center table-flush"  id="datatable-basic">
                                 <thead class="thead-light">
+                                    <form action="{{ route('admin.employees.index') }}" method="POST" id="employee-sort">                                                
+                                        @csrf 
+                                        @method('POST')
+                                        <input type="hidden" name="orderByValue" id="orderByValue" value="{{$orderByValue}}" />                                                   
+                                        <input type="hidden" name="orderBy" id="orderBy" value="{{$orderBy}}" />                                                   
+                                    </form>
                                     <tr>
                                         <th scope="col">{{ __('Sr.') }}</th>
-                                        <th scope="col">{{ __('Dept') }}</th>
-                                        <th scope="col">{{ __('Name') }}</th>
-                                        <th scope="col">{{ __('Email') }}</th>
+                                        <th scope="col">{{ __('Dept') }} <i onclick="sortEmployee('employees.name','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Name') }} <i onclick="sortEmployee('employees.email','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Email') }} <i onclick="sortEmployee('departments.name','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
                                         <th scope="col" class=""><span class="float-right mr-2">Actions</span></th>
                                     </tr>
                                 </thead>
@@ -85,6 +102,11 @@
       if(confirm('Are you sure to delete?')){
         document.getElementById("deleteEmployee").submit();
       }
+    }
+    function sortEmployee(orderByValue,orderBy){
+        document.getElementById('orderByValue').value = orderByValue;
+        document.getElementById('orderBy').value = orderBy;
+        document.getElementById("employee-sort").submit(); 
     }
   </script>
   <?php endif ?>

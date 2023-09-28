@@ -82,11 +82,31 @@ class ServiceController extends Controller {
         return view('admin.services.edit', compact('service', 'industries', 'owners','categories'));
     }
 
-    public function showServicesOfCategory($id){
-        $services = Service::orderBy('id', 'desc')->where('services.category_id',$id)
+    public function showServicesOfCategory(Request $request, $id){
+        $searchText = '';
+        $orderByValue = 'id';
+        $orderBy = 'desc';
+        if($request->has('orderByValue') && $request->input('orderByValue')!== ''){
+            $orderByValue = $request->input('orderByValue');
+            $orderBy = $request->input('orderBy');    
+        }
+        if($orderBy === 'asc'){
+            $orderByOpp = 'desc';
+        }else{
+            $orderByOpp = 'asc';
+        }
+
+        if ($request->has('searchService') && $request->input('searchService')!== '') {
+            $searchText = $request->input('searchService');   
+            $services = Service::orderBy($orderByValue, $orderBy)->where('services.category_id',$id)->where('services.name', 'LIKE',"%{$searchText}%")->orWhere('services.price_discounted', 'LIKE',"%{$earchText}%")->orWhere('services.code', 'LIKE',"%{$searchText}%")->orWhere('industries.name', 'LIKE',"%{$searchText}%")
+                 ->leftjoin('industries', 'industries.id', '=', 'services.industry_id')
+                ->select('services.*', 'industries.name as industry_name')->get();                      
+        }else{
+            $services = Service::orderBy($orderByValue, $orderBy)->where('services.category_id',$id)
                 ->leftjoin('industries', 'industries.id', '=', 'services.industry_id')
-                ->select('services.*', 'industries.name as industry_name')->get();
-        return view('admin.services.index', compact('services'));
+                ->select('services.*', 'industries.name as industry_name')->get();    
+        }        
+        return view('admin.services.index', compact('services','id','searchText','orderByValue','orderBy','orderByOpp'));
     }
 
     public function update(Request $request, Service $service){
@@ -125,13 +145,34 @@ class ServiceController extends Controller {
 
 
 
-    public function getServiceBookings(){
+    public function getServiceBookings(Request $request){
         //category_id,
-        $bookings = DB::table('service_bookings')->orderby('created_at', 'desc')
+        $searchText = '';
+        $orderByValue = 'service_bookings.created_at';
+        $orderBy = 'desc';
+        if($request->has('orderByValue') && $request->input('orderByValue')!== ''){
+            $orderByValue = $request->input('orderByValue');
+            $orderBy = $request->input('orderBy');    
+        }
+        if($orderBy === 'asc'){
+            $orderByOpp = 'desc';
+        }else{
+            $orderByOpp = 'asc';
+        }
+
+        if ($request->has('searchServiceBooking') && $request->input('searchServiceBooking')!== '') {
+            $searchText = $request->input('searchServiceBooking');
+            $bookings = DB::table('service_bookings')->where('services.name', 'LIKE',"%{$searchText}%")->orWhere('service_bookings.type', 'LIKE',"%{$searchText}%")->orWhere('service_bookings.amount', 'LIKE',"%{$searchText}%")->orWhere('users.name', 'LIKE',"%{$searchText}%")->orWhere('service_bookings.payment_method', 'LIKE',"%{$searchText}%")->orderby($orderByValue, $orderBy)
             ->leftjoin('services', 'services.id', '=', 'service_bookings.service_id')
             ->leftjoin('users', 'users.id', '=', 'service_bookings.user_id')
             ->select('service_bookings.*', 'services.name as service_name', 'services.image as service_image','users.name as user_name')->get();
-        return view('admin.services.bookings', compact('bookings'));
+        }else{
+            $bookings = DB::table('service_bookings')->orderby($orderByValue, $orderBy)
+            ->leftjoin('services', 'services.id', '=', 'service_bookings.service_id')
+            ->leftjoin('users', 'users.id', '=', 'service_bookings.user_id')
+            ->select('service_bookings.*', 'services.name as service_name', 'services.image as service_image','users.name as user_name')->get();  
+        }        
+        return view('admin.services.bookings', compact('bookings','searchText','orderByValue','orderBy','orderByOpp'));
     }
 
     public function showServiceBooking($id){

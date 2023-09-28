@@ -7,11 +7,34 @@ use App\Models\Employee;
 use Validator;
 
 class EmployeeController extends Controller {
-    public function index(){
-        $employees = Employee::orderBy('id', 'desc')
+    public function index(Request $request){
+        $searchText = '';
+        $orderByValue = 'id';
+        $orderBy = 'desc';   
+
+        if($request->has('orderByValue') && $request->input('orderByValue')!== ''){
+            $orderByValue = $request->input('orderByValue');
+            $orderBy = $request->input('orderBy');    
+        }
+        if($orderBy === 'asc'){
+            $orderByOpp = 'desc';
+        }else{
+            $orderByOpp = 'asc';
+        }
+
+        if ($request->has('searchEmployees') && $request->input('searchEmployees')!== '') {
+            $searchText = $request->input('searchEmployees');            
+            $employees = Employee::where('employees.name', 'LIKE',"%{$searchText}%")->orWhere('employees.email', 'LIKE',"%{$searchText}%")->orWhere('departments.name', 'LIKE',"%{$searchText}%")->orderBy($orderByValue,$orderBy)
                         ->leftjoin('departments', 'employees.dept_id', '=', 'departments.id') 
                         ->select('employees.*', 'departments.name as dept_name')->get();
-        return view('admin.employees.index', compact('employees'));
+        }else{
+            $employees = Employee::orderBy($orderByValue,$orderBy)
+                        ->leftjoin('departments', 'employees.dept_id', '=', 'departments.id') 
+                        ->select('employees.*', 'departments.name as dept_name')->get();   
+        }                        
+
+        
+        return view('admin.employees.index', compact('employees','searchText','orderByValue','orderBy','orderByOpp'));
     }
 
     public function create(){

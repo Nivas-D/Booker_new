@@ -7,9 +7,29 @@ use App\Models\Freelancer;
 use Validator;
 
 class FreelancerController extends Controller {
-    public function index(){
-        $freelancers = Freelancer::orderBy('id', 'desc')->get();
-        return view('admin.freelancers.index', compact('freelancers'));
+    public function index(Request $request){
+        $searchText = '';
+        $orderByValue = 'id';
+        $orderBy = 'desc';         
+        if($request->has('orderByValue') && $request->input('orderByValue')!== ''){
+            $orderByValue = $request->input('orderByValue');
+            $orderBy = $request->input('orderBy');    
+        }
+        if($orderBy === 'asc'){
+            $orderByOpp = 'desc';
+        }else{
+            $orderByOpp = 'asc';
+        }
+
+        if ($request->has('searchFreelancers') && $request->input('searchFreelancers')!== '') {
+            $searchText = $request->input('searchFreelancers');
+            $freelancers = Freelancer::where('freelancers.name', 'LIKE',"%{$searchText}%")->orWhere('email', 'LIKE',"%{$searchText}%")->orWhere('phone', 'LIKE',"%{$searchText}%")->orWhere('skills', 'LIKE',"%{$searchText}%")->orderBy($orderByValue, $orderBy)->get();
+        }else{
+            $freelancers = Freelancer::orderBy($orderByValue, $orderBy)->get();   
+        }                        
+
+        
+        return view('admin.freelancers.index', compact('freelancers','searchText','orderByValue','orderBy','orderByOpp'));
     }
 
     public function create(){

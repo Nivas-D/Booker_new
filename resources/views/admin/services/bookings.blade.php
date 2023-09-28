@@ -29,19 +29,36 @@
             <div class="col-md-12">
                 <div class="card border-0">
                     <div class="card-body">
+                        <form action="{{ route('admin.service.bookings.post') }}" method="POST" id="services-booking-index">
+                            @csrf
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6"></div> 
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="search">
+                                        <input type="text" class="search-input form-control" placeholder="Search By /Service/Type/Client/Amount/Payment Method" name="searchServiceBooking" value="{{ $searchText }}">
+                                    </div>                                                                                                                            
+                                </div>                                        
+                            </div>
+                        </form>
                         <div class="table-responsive py-4" id="categories-table">
                             <table class="table align-items-center table-flush"  id="datatable-basic">
                                 <thead class="thead-light">
+                                    <form action="{{ route('admin.service.bookings.post') }}" method="POST" id="service-bookings-sort">                                                
+                                        @csrf 
+                                        @method('POST')
+                                        <input type="hidden" name="orderByValue" id="orderByValue" value="{{$orderByValue}}" />                                                   
+                                        <input type="hidden" name="orderBy" id="orderBy" value="{{$orderBy}}" />                                                   
+                                    </form>
                                     <tr>
                                         <th scope="col">{{ __('Sr.') }}</th>
-                                        <th scope="col">{{ __('Service') }}</th>
-                                        <th scope="col">{{ __('Type') }}</th>
-                                        <th scope="col">{{ __('Client') }}</th>
-                                        <th scope="col">{{ __('Amount') }}</th>
-                                        <th scope="col">{{ __('Payment') }}</th> 
-                                        <th scope="col">{{ __('Payment Status') }}</th>
-                                        <th scope="col">{{ __('Booking Status') }}</th>
-                                        <th scope="col">{{ __('Date') }}</th>
+                                        <th scope="col">{{ __('Service') }} <i onclick="sortServiceBookings('services.name','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Type') }} <i onclick="sortServiceBookings('service_bookings.type','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Client') }} <i onclick="sortServiceBookings('users.name','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Amount') }} <i onclick="sortServiceBookings('service_bookings.amount','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Payment') }} <i onclick="sortServiceBookings('service_bookings.payment_method','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th> 
+                                        <th scope="col">{{ __('Payment Status') }} <i onclick="sortServiceBookings('service_bookings.payment_status','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Booking Status') }} <i onclick="sortServiceBookings('service_bookings.booking_status','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Date') }} <i onclick="sortServiceBookings('service_bookings.created_at','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
                                          {{-- <th scope="col" class=""><span class="float-right mr-2">Actions</span></th> --}}
                                     </tr>
                                 </thead>
@@ -79,6 +96,15 @@
         @include('layouts.footers.admin-footer')
     </div>
 @endsection
+<?php if(sizeof($bookings)): ?>
+  <script>    
+    function sortServiceBookings(orderByValue,orderBy){
+        document.getElementById('orderByValue').value = orderByValue;
+        document.getElementById('orderBy').value = orderBy;
+        document.getElementById("service-bookings-sort").submit(); 
+    } 
+  </script>
+  <?php endif ?>
 @push('js')
     <script src="{{ asset('admin') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('admin') }}/vendor/chart.js/dist/Chart.extension.js"></script>

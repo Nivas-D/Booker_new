@@ -31,15 +31,32 @@
             <div class="col-md-12">
                 <div class="card border-0">
                     <div class="card-body">
+                        <form action="{{ route('admin.service.category.post',['id'=>$id]) }}" method="POST" id="services-index">
+                            @csrf
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6"></div> 
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="search">
+                                        <input type="text" class="search-input form-control" placeholder="Search By Code/Service Name/Price/Industry" name="searchService" value="{{ $searchText }}">
+                                    </div>                                                                                                                            
+                                </div>                                        
+                            </div>
+                        </form>
                         <div class="table-responsive py-4" id="services-table">
                             <table class="table align-items-center table-flush" id="datatable-basic">
                                 <thead class="thead-light">
+                                    <form action="{{ route('admin.service.category.post',['id'=>$id]) }}" method="POST" id="service-sort">                                                
+                                        @csrf 
+                                        @method('POST')
+                                        <input type="hidden" name="orderByValue" id="orderByValue" value="{{$orderByValue}}" />                                                   
+                                        <input type="hidden" name="orderBy" id="orderBy" value="{{$orderBy}}" />                                                   
+                                    </form>
                                     <tr>
                                         <th scope="col">{{ __('Sr.') }}</th>
-                                        <th scope="col">{{ __('Code') }}</th>
-                                        <th scope="col">{{ __('Service Name') }}</th>
-                                        <th scope="col">{{ __('Price') }}</th>
-                                        <th scope="col">{{ __('Industry') }}</th>
+                                        <th scope="col">{{ __('Code') }} <i onclick="sortService('services.code','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Service Name') }} <i onclick="sortService('services.name','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Price') }} <i onclick="sortService('services.price_discounted','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Industry') }} <i onclick="sortService('industries.name','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
                                         <th scope="col">{{ __('Active') }}</th>
                                         <th scope="col"><span class="float-right mr-2">Actions</span></th>
                                     </tr>
@@ -89,6 +106,11 @@
         document.getElementById("deleteService").submit();
       }
     }
+    function sortService(orderByValue,orderBy){
+        document.getElementById('orderByValue').value = orderByValue;
+        document.getElementById('orderBy').value = orderBy;
+        document.getElementById("service-sort").submit(); 
+    } 
   </script>
   <?php endif ?>
 @push('js')

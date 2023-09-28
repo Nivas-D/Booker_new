@@ -7,9 +7,27 @@ use App\Models\Plan;
 use Validator;
 
 class PlanController extends Controller {
-    public function index(){
-        $plans = Plan::orderBy('id', 'desc')->get();
-        return view('admin.plans.index', compact('plans'));
+    public function index(Request $request){
+        $searchText = '';
+        $orderByValue = 'id';
+        $orderBy = 'desc';          
+        if($request->has('orderByValue') && $request->input('orderByValue')!== ''){
+            $orderByValue = $request->input('orderByValue');
+            $orderBy = $request->input('orderBy');    
+        }
+        if($orderBy === 'asc'){
+            $orderByOpp = 'desc';
+        }else{
+            $orderByOpp = 'asc';
+        } 
+        
+        if ($request->has('searchPlans') && $request->input('searchPlans')!== '') {
+            $searchText = $request->input('searchPlans');            
+            $plans = Plan::where('name', 'LIKE',"%{$searchText}%")->orWhere('description', 'LIKE',"%{$searchText}%")->orderBy($orderByValue, $orderBy)->get();
+        }else{
+            $plans = Plan::orderBy($orderByValue, $orderBy)->get();    
+        }                        
+        return view('admin.plans.index', compact('plans','searchText','orderByValue','orderBy','orderByOpp'));
     }
 
     public function create(){

@@ -31,15 +31,32 @@
             <div class="col-md-12">
                 <div class="card border-0">
                     <div class="card-body">
+                        <form action="{{ route('products.index') }}" method="POST" id="categories-index">
+                            @csrf
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6"></div> 
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="search">
+                                        <input type="text" class="search-input form-control" placeholder="Search By Name/Code/Category/Price" name="searchProducts" value="{{ $searchText }}">
+                                    </div>                                                                                                                            
+                                </div>                                        
+                            </div>
+                        </form>
                         <div class="table-responsive py-4" id="products-table">
                             <table class="table align-items-center table-flush"  id="datatable-basic">
                                 <thead class="thead-light">
+                                    <form action="{{ route('products.index') }}" method="POST" id="products-sort">                                                
+                                        @csrf 
+                                        @method('POST')
+                                        <input type="hidden" name="orderByValue" id="orderByValue" value="{{$orderByValue}}" />                                                   
+                                        <input type="hidden" name="orderBy" id="orderBy" value="{{$orderBy}}" />                                                   
+                                    </form>
                                     <tr>
                                         <th scope="col">{{ __('Sr.') }}</th>
-                                        <th scope="col">{{ __('Code') }}</th>
-                                        <th scope="col">{{ __('Product Name') }}</th>
-                                        <th scope="col">{{ __('Category') }}</th>
-                                        <th scope="col">{{ __('Price') }}</th>
+                                        <th scope="col">{{ __('Code') }} <i onclick="sortProduct('products.code','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Product Name') }} <i onclick="sortProduct('products.name','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Category') }} <i onclick="sortProduct('categories.name','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Price') }} <i onclick="sortProduct('products.price_discounted','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
                                         <th scope="col">{{ __('Active') }}</th>
                                         <th scope="col"><span class="float-right mr-2">Actions</span></th>
                                     </tr>
@@ -89,6 +106,11 @@
         document.getElementById("deleteProduct").submit();
       }
     }
+    function sortProduct(orderByValue,orderBy){
+        document.getElementById('orderByValue').value = orderByValue;
+        document.getElementById('orderBy').value = orderBy;
+        document.getElementById("products-sort").submit(); 
+    }    
   </script>
   <?php endif ?>
 @push('js')

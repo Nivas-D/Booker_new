@@ -84,7 +84,7 @@
             <div class="col-md-12">
                 <div class="card border-0">
                     <div class="card-body">
-                                <form action="{{ route('categories.index') }}" method="POST" id="categories-idndex">
+                                <form action="{{ route('categories.index') }}" method="POST" id="categories-index">
                                     @csrf
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6"></div> 

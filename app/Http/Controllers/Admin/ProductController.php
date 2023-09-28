@@ -7,12 +7,38 @@ use App\Models\Product;
 use Validator;
 
 class ProductController extends Controller {
-    public function index(){
-        $products = Product::orderBy('id', 'desc')
+    public function index(Request $request){
+        $searchText = '';
+        $orderByValue = 'id';
+        $orderBy = 'desc';  
+        if($request->has('orderByValue') && $request->input('orderByValue')!== ''){
+            $orderByValue = $request->input('orderByValue');
+            $orderBy = $request->input('orderBy');    
+        }
+
+        if ($request->has('searchProducts') && $request->input('searchProducts')!== '') {
+            $searchText = $request->input('searchProducts');            
+            $products = Product::where('products.name', 'LIKE',"%{$searchText}%")->orWhere('products.code', 'LIKE',"%{$searchText}%")->orWhere('products.price_discounted', 'LIKE',"%{$searchText}%")->orWhere('categories.name', 'LIKE',"%{$searchText}%")->orderBy($orderByValue, $orderBy)
                 ->leftjoin('categories', 'categories.id', '=', 'products.category_id')
                 ->leftjoin('product_inventory', 'product_inventory.product_id', '=', 'products.id')
                 ->select('products.*', 'categories.name as category_name', 'product_inventory.quantity')->get();
-        return view('admin.products.index', compact('products'));
+
+        }else{
+            $products = Product::orderBy($orderByValue, $orderBy)
+                ->leftjoin('categories', 'categories.id', '=', 'products.category_id')
+                ->leftjoin('product_inventory', 'product_inventory.product_id', '=', 'products.id')
+                ->select('products.*', 'categories.name as category_name', 'product_inventory.quantity')->get();   
+        } 
+
+        
+
+        if($orderBy === 'asc'){
+            $orderByOpp = 'desc';
+        }else{
+            $orderByOpp = 'asc';
+        }
+
+        return view('admin.products.index', compact('products','searchText','orderByValue','orderBy','orderByOpp'));
     }
 
     public function create(){
@@ -101,11 +127,31 @@ class ProductController extends Controller {
         return redirect()->route('products.index');
     }
 
-    public function getProductOrders(){
-        $orders = DB::table('product_orders')->orderby('created_at', 'desc')
+    public function getProductOrders(Request $request){
+        $searchText = '';
+        $orderByValue = 'created_at';
+        $orderBy = 'desc';   
+        if($request->has('orderByValue') && $request->input('orderByValue')!== ''){
+            $orderByValue = $request->input('orderByValue');
+            $orderBy = $request->input('orderBy');    
+        }
+        if($orderBy === 'asc'){
+            $orderByOpp = 'desc';
+        }else{
+            $orderByOpp = 'asc';
+        }
+
+        if ($request->has('searchProductOrders') && $request->input('searchProductOrders')!== '') {
+            $searchText = $request->input('searchProductOrders');            
+            $orders = DB::table('product_orders')->where('products.name', 'LIKE',"%{$searchText}%")->orWhere('product_orders.quantity', 'LIKE',"%{$searchText}%")->orWhere('product_orders.amount', 'LIKE',"%{$searchText}%")->orWhere('product_orders.order_status', 'LIKE',"%{$searchText}%")->orderby($orderByValue,$orderBy)
             ->join('products', 'products.id', '=', 'product_orders.product_id')
             ->select('product_orders.*', 'products.name as product_name', 'products.image as product_image')->get();
-        return view('admin.products.orders', compact('orders'));
+        }else{
+            $orders = DB::table('product_orders')->orderby($orderByValue,$orderBy)
+            ->join('products', 'products.id', '=', 'product_orders.product_id')
+            ->select('product_orders.*', 'products.name as product_name', 'products.image as product_image')->get();    
+        }                                
+        return view('admin.products.orders', compact('orders','searchText','orderByValue','orderBy','orderByOpp'));
     }
 
     public function showProductOrder($id){

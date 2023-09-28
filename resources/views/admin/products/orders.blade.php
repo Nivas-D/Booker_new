@@ -29,15 +29,32 @@
             <div class="col-md-12">
                 <div class="card border-0">
                     <div class="card-body">
+                        <form action="{{ route('admin.product.orders.post') }}" method="POST" id="products-orders-index">
+                            @csrf
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6"></div> 
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="search">
+                                        <input type="text" class="search-input form-control" placeholder="Search By Product/Quantity/Amount/Status" name="searchProductOrders" value="{{ $searchText }}">
+                                    </div>                                                                                                                            
+                                </div>                                        
+                            </div>
+                        </form>
                         <div class="table-responsive py-4" id="categories-table">
                             <table class="table align-items-center table-flush"  id="datatable-basic">
                                 <thead class="thead-light">
+                                    <form action="{{ route('admin.product.orders.post') }}" method="POST" id="products-orders-sort">                                                
+                                        @csrf 
+                                        @method('POST')
+                                        <input type="hidden" name="orderByValue" id="orderByValue" value="{{$orderByValue}}" />                                                   
+                                        <input type="hidden" name="orderBy" id="orderBy" value="{{$orderBy}}" />                                                   
+                                    </form>
                                     <tr>
                                         <th scope="col">{{ __('Sr.') }}</th>
-                                        <th scope="col">{{ __('Product') }}</th>
-                                        <th scope="col">{{ __('Quantity') }}</th>
-                                        <th scope="col">{{ __('Amount') }}</th>
-                                        <th scope="col">{{ __('Status') }}</th>
+                                        <th scope="col">{{ __('Product') }} <i onclick="sortProductOrder('products.name','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Quantity') }} <i onclick="sortProductOrder('product_orders.quantity','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Amount') }} <i onclick="sortProductOrder('product_orders.amount','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
+                                        <th scope="col">{{ __('Status') }} <i onclick="sortProductOrder('product_orders.order_status','{{$orderByOpp}}')" class="fa fa-sort" style="cursor:pointer"></i></th>
                                         <th scope="col" class=""><span class="float-right mr-2">Actions</span></th>
                                     </tr>
                                 </thead>
@@ -68,6 +85,15 @@
         @include('layouts.footers.admin-footer')
     </div>
 @endsection
+<?php if(sizeof($orders)): ?>
+  <script>    
+    function sortProductOrder(orderByValue,orderBy){
+        document.getElementById('orderByValue').value = orderByValue;
+        document.getElementById('orderBy').value = orderBy;
+        document.getElementById("products-orders-sort").submit(); 
+    }
+  </script>
+  <?php endif ?>
 @push('js')
     <script src="{{ asset('admin') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('admin') }}/vendor/chart.js/dist/Chart.extension.js"></script>

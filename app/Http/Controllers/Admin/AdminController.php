@@ -22,8 +22,25 @@ class AdminController extends Controller {
         ];
         return view('admin.dashboard', compact('products', 'services', 'stats'));
     } 
-    public function contactMessages(){
-        $messages = DB::table('contact_messages')->orderBy('created_at', 'desc')->get();
-        return view('admin.contact-messages', compact('messages'));
+    public function contactMessages(Request $request){
+        $searchText = '';
+        $orderByValue = 'created_at';
+        $orderBy = 'desc';          
+        if($request->has('orderByValue') && $request->input('orderByValue')!== ''){
+            $orderByValue = $request->input('orderByValue');
+            $orderBy = $request->input('orderBy');    
+        }
+        if($orderBy === 'asc'){
+            $orderByOpp = 'desc';
+        }else{
+            $orderByOpp = 'asc';
+        }         
+        if ($request->has('searchContactMessages') && $request->input('searchContactMessages')!== '') {
+            $searchText = $request->input('searchContactMessages');            
+            $messages = DB::table('contact_messages')->where('name', 'LIKE',"%{$searchText}%")->orWhere('email', 'LIKE',"%{$searchText}%")->orWhere('title', 'LIKE',"%{$searchText}%")->orWhere('message', 'LIKE',"%{$searchText}%")->orderBy($orderByValue,$orderBy)->get();
+        }else{
+            $messages = DB::table('contact_messages')->orderBy($orderByValue,$orderBy)->get();   
+        }         
+        return view('admin.contact-messages', compact('messages','searchText','orderByValue','orderBy','orderByOpp'));
     }
 }

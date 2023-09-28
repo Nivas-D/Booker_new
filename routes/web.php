@@ -79,6 +79,7 @@ Route::get('lang/{locale}', [LocalizationController::class, 'lang'])->name('lang
 Route::group(['middleware' => ['auth']], function () {
     Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin/dashboard');
     Route::get('admin/contact-messages', [AdminController::class, 'contactMessages'])->name('admin.contactmessages');
+    Route::post('admin/contact-messages', [AdminController::class, 'contactMessages'])->name('admin.contactmessages.post');
     Route::get('admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::resource('admin/categories', CategoryController::class);
     Route::post('admin/categories', [CategoryController::class, 'index'])->name('categories.index');
@@ -87,19 +88,26 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('admin/industries', [IndustryController::class, 'index'])->name('industries.index');
     Route::post('admin/industries/store', [IndustryController::class, 'store'])->name('industries.store');
     Route::resource('admin/products', ProductController::class);
+    Route::post('admin/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('admin/product/orders', [App\Http\Controllers\Admin\ProductController::class, 'getProductOrders' ])->name('admin.product.orders');
+    Route::post('admin/product/orders', [App\Http\Controllers\Admin\ProductController::class, 'getProductOrders' ])->name('admin.product.orders.post');
     Route::get('admin/product/order/{id}', [App\Http\Controllers\Admin\ProductController::class, 'showProductOrder' ])->name('admin.product.orders.show');
     Route::resource('admin/services', ServiceController::class);
     Route::resource('admin/main-services', MainserviceController::class);
     // Route::get('admin/main-services', [App\Http\Controllers\Admin\ServiceController::class , 'main_services'])->name('admin.main_services');
     Route::get('admin/service/bookings', [App\Http\Controllers\Admin\ServiceController::class, 'getServiceBookings' ])->name('admin.service.bookings');
-    Route::get('admin/service/bookings', [App\Http\Controllers\Admin\ServiceController::class, 'getServiceBookings' ])->name('admin.service.bookings');
+    Route::post('admin/service/bookings', [App\Http\Controllers\Admin\ServiceController::class, 'getServiceBookings' ])->name('admin.service.bookings.post');
     Route::get('admin/category/service/{id}', [App\Http\Controllers\Admin\ServiceController::class, 'showServicesOfCategory' ])->name('admin.service.category');
+    Route::post('admin/category/service/{id}', [App\Http\Controllers\Admin\ServiceController::class, 'showServicesOfCategory' ])->name('admin.service.category.post');
     Route::resource('admin/employees', EmployeeController::class);
+    Route::post('admin/employees', [EmployeeController::class, 'index'])->name('admin.employees.index');
     Route::resource('admin/freelancers', FreelancerController::class);
+    Route::post('admin/freelancers', [FreelancerController::class, 'index'])->name('admin.freelancers.index');
     Route::resource('admin/plans', PlanController::class);
+    Route::post('admin/plans', [PlanController::class, 'index'])->name('admin.plans.index');
     Route::resource('admin/orders', OrderController::class);
     Route::resource('admin/inventory', InventoryController::class);
+    Route::post('admin/inventory', [InventoryController::class, 'index'])->name('inventory.index');    
 });
 Route::group([], function () {
     Route::get('owner/dashboard', [OwnerController::class, 'dashboard'])->name('owner/dashboard');
