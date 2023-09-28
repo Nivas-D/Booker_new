@@ -41,6 +41,7 @@ class BusinessController extends Controller {
                 ->whereNull('business.user_id')
                 ->get();
         } 
+        // 
         return view('admin.business.index', compact('business','searchText','orderByValue','orderBy','orderByOpp'));
     }
 
