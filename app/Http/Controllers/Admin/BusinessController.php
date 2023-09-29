@@ -4,7 +4,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Business;
+use App\Models\User;
 use Validator;
+use Mail;
+use App\Mail\BusinnessLoginRegister;
+use Illuminate\Support\Facades\Hash;
 
 class BusinessController extends Controller {
     
@@ -29,7 +33,8 @@ class BusinessController extends Controller {
                 ->leftJoin('users', 'users.id', '=', 'business.user_id')
                 ->leftJoin('categories', 'categories.id', '=', 'business.category_id')
                 ->select('business.*', 'users.name as user_name','categories.name as category')
-                ->whereNull('business.user_id')
+                ->whereNotNull('business.user_id')
+                ->orWhereNull('business.user_id')
                 ->get();
 
         }else{
@@ -38,14 +43,51 @@ class BusinessController extends Controller {
                 ->leftJoin('users', 'users.id', '=', 'business.user_id')
                 ->leftJoin('categories', 'categories.id', '=', 'business.category_id')
                 ->select('business.*', 'users.name as user_name','categories.name as category')
-                ->whereNull('business.user_id')
+                ->whereNotNull('business.user_id')
+                ->orWhereNull('business.user_id')
                 ->get();
         } 
         // 
         return view('admin.business.index', compact('business','searchText','orderByValue','orderBy','orderByOpp'));
     }
 
-    public function register(Request $request,$id){
+    public function approve(Request $request,$id){
+        $business = DB::table('business')->where('business.id','=',$id)->first();
+       
+        $data = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz';
+        $password = substr(str_shuffle($data), 0,6);
+       
+        if ($business) {
+            $user = User::create([
+                'name'=>$business->company_name,
+                'first_name' => $business->company_name,
+                'last_name' => '',
+                'email' => $business->email,
+                'role'=>'owner',
+                'role_id' => 3,
+                'password' => Hash::make($password),
+            ]);
+            $newUserId = $user->id;
+            DB::table('business')
+            ->where('id', $business->id)
+            ->update(['user_id' => $newUserId,'status' => 1,'password' => $password]);
+            $mailData = [
+                "name" => $business->company_name,
+                "email" => $business->email,
+                "password" => $password,
+                "link" => "http://bookertest.aryvart.com/business/login",//URL::to('/');
+                "title" => "Approval confirmation",
+            ];
+            $isEmailed = Mail::to($business->email)->send(
+                new BusinnessLoginRegister($mailData)
+            );
+            return redirect()->route("admin.business.index")->with('success', 'Business Registered Approved successfully');
+        }
         
+        print_r($business);
+        echo $id;
+        exit();
     }
+
+
 }

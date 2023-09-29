@@ -13,7 +13,8 @@ class Business extends Model{
         'company_name', 
         'category_id', 
         'description',
-        'user_id'
+        'user_id',
+        'status'
     ];
     // public function items(){
     //     return $this->hasMany(Item::class);

@@ -76,7 +76,18 @@
                                                 <span class="p-1 {{ ($businessItem->status==1) ? 'alert-success': 'alert-danger' }}">{{ ($businessItem->status==1)?'Active':'InActive' }}</span>
                                             </td>
                                             <td>
-                                                
+                                                <span class="float-right">
+                                                @if($businessItem->status==0)
+                                                        <a class="btn btn-sm btn-neutral" onclick="approveBusinessHandler()">
+                                                            <i class="fas fa-eye"></i> Approve
+                                                            <form action="{{ route('admin.business.approve', $businessItem->id) }}" method="POST" id="approveBusiness">
+                                                             
+                                                            @csrf
+                                                        </form>
+                                                        </a>
+                                                @endif  
+                                                        
+                                                </span>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -97,6 +108,11 @@
         document.getElementById('orderBy').value = orderBy;
         document.getElementById("business-sort").submit(); 
     } 
+    function approveBusinessHandler(){
+      if(confirm('Are you sure want to approve ?')){
+        document.getElementById("approveBusiness").submit();
+      }
+    }
   </script>
   <?php endif ?>
 @push('js')

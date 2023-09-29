@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Business;
 use Validator;
 use Mail;
+use Illuminate\Support\Facades\DB;
 use App\Mail\BusinessRegister;
 
 class BusinessController extends Controller
@@ -85,18 +86,32 @@ class BusinessController extends Controller
             "company_name" => $request->input("company_name"),
             "description" => $request->input("description"),
         ];
-        $mailData = [
-            "name" => $request->input("company_name"),
-            "title" => "Business Registration Notification",
-        ];
-
+        $user = DB::table('users')
+                ->where('email', $request->input('email'))
+                ->select('email')
+                ->union(DB::table('business')
+                    ->where('email', $request->input('email'))
+                    ->select('email')
+                )
+                ->first();
+        if ($user) {
+            return redirect()->back()
+            ->withInput()
+            ->withErrors(['email' => 'User with this email already exists.']);
+            // User with the given email exists
+        } else {
+            // User with the given email does not exist
+            $mailData = [
+                "name" => $request->input("company_name"),
+                "title" => "Business Registration Notification",
+            ];
+            Business::create($data);
+            $isEmailed = Mail::to($request->input("email"))->send(
+                new BusinessRegister($mailData)
+            );
+            return redirect()->route("public.home")->with('success', 'Business Registered successfully');
+        }
         
-
-        Business::create($data);
-        $isEmailed = Mail::to($request->input("email"))->send(
-            new BusinessRegister($mailData)
-        );
-        return redirect()->route("public.home")->with('success', 'Business Registered successfully');
     }
 
     /**
