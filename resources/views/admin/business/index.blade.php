@@ -80,11 +80,12 @@
                                                 @if($businessItem->status==0)
                                                         <a class="btn btn-sm btn-neutral" onclick="approveBusinessHandler()">
                                                             <i class="fas fa-eye"></i> Approve
-                                                            <form action="{{ route('admin.business.approve', $businessItem->id) }}" method="POST" id="approveBusiness">
+                                                            
+                                                        </a>
+                                                        <form action="{{ route('admin.business.approve', $businessItem->id) }}" method="POST" id="approveBusiness">
                                                              
                                                             @csrf
                                                         </form>
-                                                        </a>
                                                 @endif  
                                                         
                                                 </span>
