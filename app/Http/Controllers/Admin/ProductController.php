@@ -151,7 +151,7 @@ class ProductController extends Controller {
             $orders = DB::table('product_orders')->orderby($orderByValue,$orderBy)
             ->join('products', 'products.id', '=', 'product_orders.product_id')
             ->leftjoin('users', 'users.id', '=', 'product_orders.user_id')
-            ->select('product_orders.*', 'products.name as product_name', 'products.image as product_image')->get();    
+            ->select('product_orders.*', 'products.name as product_name', 'products.image as product_image','users.name as user_name')->get();    
         }                                
         return view('admin.products.orders', compact('orders','searchText','orderByValue','orderBy','orderByOpp'));
     }

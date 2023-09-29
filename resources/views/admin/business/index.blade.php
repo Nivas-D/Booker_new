@@ -35,7 +35,7 @@
                                 <div class="col-sm-12 col-md-6"></div> 
                                 <div class="col-sm-12 col-md-6">
                                     <div class="search">
-                                        <input type="text" class="search-input form-control" placeholder="Search By /type/login/email" name="searchBusiness" value="{{ $searchText }}">
+                                        <input type="text" class="search-input form-control" placeholder="Search By Category/Compnay/Email/Telephone/Title/Date" name="searchBusiness" value="{{ $searchText }}">
                                     </div>                                                                                                                            
                                 </div>                                        
                             </div>
@@ -73,15 +73,10 @@
                                              <td class="text-primary">{{ $businessItem->company_name }}</td>
                                              <td class="text-primary">{{ date('m/d/Y',strtotime($businessItem->created_at)) }}</td>
                                              <td class="text-primary">
-                                            <span  class="p-1 {{ ($businessItem->status==1) ? 'alert-success': 'alert-danger' }}">
-                                                {{ ($businessItem->status==1)?'Active':'InActive' }}</span>
+                                                <span class="p-1 {{ ($businessItem->status==1) ? 'alert-success': 'alert-danger' }}">{{ ($businessItem->status==1)?'Active':'InActive' }}</span>
                                             </td>
                                             <td>
-                                              {{--  <span class="float-right">
-                                                    <a class="btn btn-sm btn-neutral" href="{{ route('admin.service.bookings.show', ['id' => $booking->id]) }}">
-                                                        <i class="fas fa-eye"></i> View
-                                                    </a>
-                                                </span> --}}
+                                                
                                             </td>
                                         </tr>
                                     @endforeach

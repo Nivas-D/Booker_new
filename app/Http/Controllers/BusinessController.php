@@ -24,6 +24,14 @@ class BusinessController extends Controller
         return view("business.create", compact("categories"));
     }
 
+    public function login()
+    {
+        //echo '111'; exit;
+        // $Category = Category :: get();
+        $categories = Category::orderBy("id", "desc")->get();
+        return view("business.login", compact("categories"));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

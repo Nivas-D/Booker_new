@@ -44,7 +44,7 @@
 
     <!-- Font Awesome -->
     <link href="{{asset('css/mdb-min.css')}}" rel="stylesheet" />
-    <!-- <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script> -->
+    <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script> 
 
     <!-- Main Css -->
     <link href="{{asset('css/colors/purple.css')}}" rel="stylesheet" id="color-opt">
