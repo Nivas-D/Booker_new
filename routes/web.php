@@ -81,7 +81,7 @@ Route::group(config('translation.route_group_config') + ['namespace' => 'JoeDixo
 Route::get('lang/{locale}', [LocalizationController::class, 'lang'])->name('lang'); //'LocalizationController@lang');
 
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth','roles:admin,superadmin']], function () {
     Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin/dashboard');
     Route::get('admin/contact-messages', [AdminController::class, 'contactMessages'])->name('admin.contactmessages');
     Route::post('admin/contact-messages', [AdminController::class, 'contactMessages'])->name('admin.contactmessages.post');
@@ -119,7 +119,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('admin/inventory', InventoryController::class);
     Route::post('admin/inventory', [InventoryController::class, 'index'])->name('inventory.index');    
 });
-Route::group([], function () {
+Route::group(['middleware' => ['auth','roles:owner']], function () {
     Route::get('owner/dashboard', [OwnerController::class, 'dashboard'])->name('owner/dashboard');
     Route::get('owner/profile', [OwnerController::class, 'profile'])->name('owner.profile');
     Route::resource('owner/products', App\Http\Controllers\Owner\ProductController::class, ['as' => 'owner']);
