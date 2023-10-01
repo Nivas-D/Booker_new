@@ -110,7 +110,7 @@
                         ">
 
                             <div class="form-group d-flex mb-4 row">
-                                <div class="col-12 px-3">
+                                <div class="col-6 px-3 mb-3">
                                     <label for="name" class="form-label">Category </label>
                                     <select class="form-select" aria-label="Default select example" id ="category" name = "category">
                                         <option selected>Select Category</option>
@@ -121,7 +121,7 @@
 
                                     </select>
                                 </div>
-                                <div class="col-12 px-3">
+                                <div class="col-6 px-3 mb-3">
                                     <label for="name" class="form-label">Location</label>
                                     <select class="form-select" aria-label="Default select example" name = "location"  id = "location" onchange = "loadlocation_collaborater(this.value)">
                                         <option selected>Select Location</option>
@@ -130,7 +130,7 @@
                                         <option value="3">Munich </option> -->
                                     </select>
                                 </div>
-                                <div class="col-12 px-3">
+                                <div class="col-6 px-3">
                                     <label for="name" class="form-label">Collaborater </label>
                                     <select class="form-select" aria-label="Default select example" name ="collaborater" id = "collaborater">
                                         <option selected>Select Location</option>
@@ -142,12 +142,12 @@
 
 
                             <div class="form-group d-flex mb-4 row">
-                                <div class="col-6 px-3">
+                                <div class="col-6 px-3 p-3">
+                                    <input type = "button" class = "btn btn-primary " value = "Submit" onclick="newappointment()">
                                     {{-- <label for="name" class="form-label">Date </label>
                                     <input type="date" class="form-control" id="date" aria-describedby="date"> --}}
                                 </div>
-                                <div class="col-6 px-3 p-3 mt-3 text-end">
-                                    <input type = "button" class = "btn btn-primary " value = "Submit" onclick="newappointment()">
+                                <div class="col-6 px-3 p-3 mt-3 text-end">                                    
                                     {{-- <a href=" myorders-checkout.html" class="btn btn-primary mt-1">Submit </a> --}}
                                 </div>
                             </div>
@@ -396,7 +396,7 @@
                                 
                               </div>
                               <input type='button' value='-' class='btn qtyminus minus' field='quantity'style="background-color: #e43f52;color: #ffff ;border-radius: 5px;"/>
-                                      <input type='text' name='quantity'  class="quantity-add"value='1' class='qty' style="width: 30px;height: 27px" />
+                                      <input type='text' name='quantity'  class="quantity-add"value='1' class='qty' style="width: 38px;height: 30px;text-align:center;" />
                                       <input type='button' value='+' class='btn qtyplus plus' field='quantity' style="background-color: #e43f52;color: #ffff;border-radius: 5px;" />
                                    
 
@@ -498,8 +498,8 @@
                                 
                               </div>
 
-                              <input type='button' value='-' class=' btn qtyminus minus' field='quantity'style="background-color: #e43f52;color: #ffff ;border-radius: 5px;"/>
-                                      <input type='text' name='quantity'  class="    quantity-add"value='1' class='qty' style="width: 30px;height: 27px; "/>
+                              <input type='button' value='-' class=' btn qtyminus minus' field='quantity'style="background-color: #e43f52;color: #ffff;border-radius: 5px;"/>
+                                      <input type='text' name='quantity' class="quantity-add" value='1' class='qty' style="width: 38px;height: 30px;text-align:center;"/>
                                       <input type='button' value='+' class='btn qtyplus plus' field='quantity' style="background-color: #e43f52;color: #ffff;border-radius: 5px;" />
                                    
 
