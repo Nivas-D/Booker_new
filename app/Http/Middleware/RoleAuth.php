@@ -21,7 +21,7 @@ class RoleAuth
         if (auth()->check()) {
             $user = auth()->user();
 
-            // Check if the user's role is in the list of specified roles
+            // Check if the user's role is in the list of specified roles access in web
             if (in_array($user->role, $roles)) {
                 return $next($request);
             }
