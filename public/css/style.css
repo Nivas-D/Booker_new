@@ -2219,7 +2219,8 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Nunito", sans-serif;
+  /*font-family: "Nunito", sans-serif;*/
+  font-family: "Poppins", sans-serif;
   line-height: 1.5;
   font-weight: 600;
 }
@@ -5302,3 +5303,7 @@ btn-default:active {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+.cursor-pointer {
+  cursor: pointer;
+}

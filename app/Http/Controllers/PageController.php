@@ -76,16 +76,12 @@ class PageController extends Controller {
 
     public function book_now($id){
         $category = Category::get();
-$product = Product::orderBy('created_at', 'desc')->where('active', 'yes')->get();
-
-
-       $services= Service::where('status', 1)->where('category_id',$id)
+        $product = Product::orderBy('created_at', 'desc')->where('active', 'yes')->get();
+        $services= Service::where('status', 1)->where('category_id',$id)
         ->inRandomOrder()
         ->get();
-
-
-
-         return view('user.booking.booknow',compact('category','services','product'));    }
+        return view('user.booking.booknow',compact('category','services','product'));
+    }
 
     public function get_collaboratera(Request $request){
         $collaborate[] = array('name' =>'AEL - Auto-école Lémanique',

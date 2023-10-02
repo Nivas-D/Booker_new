@@ -232,8 +232,11 @@ button:disabled {
     pointer-events: none;
     opacity: 0.3;
 }
-input.qtyplus { width:25px; height:25px;}
-input.qtyminus { width:25px; height:25px;}
+/*input.qtyplus { width:25px; height:25px;}
+input.qtyminus { width:25px; height:25px;}*/
+
+input.qtyplus { width:auto; height:auto;}
+input.qtyminus { width:auto; height:auto;}
 
 .success-email-text{
     background: #EAF9DE;
@@ -416,7 +419,7 @@ input.qtyminus { width:25px; height:25px;}
                                 <div class="col">
                                     <!-- Simple link -->
                                     <a data-mdb-toggle="modal"
-                            data-mdb-target="#forgotpwdModel">{{ __('translation::menu.forgot_password') }}?</a>
+                            data-mdb-target="#forgotpwdModel" class="cursor-pointer">{{ __('translation::menu.forgot_password') }}?</a>
                                 </div>
                             </div>
                             <div class="success-email-text" style="display:none;">
@@ -425,10 +428,10 @@ input.qtyminus { width:25px; height:25px;}
                             </div>
 
                             <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary btn-block mb-4 py-3">{{ __('translation::menu.login') }} <i
+                            <button type="submit" class="btn btn-primary btn-block mb-4 py-3 cursor-pointer">{{ __('translation::menu.login') }} <i
                                     class="fas fa-arrow-right-long"></i>
                             </button>
-                            <p>{{ __('translation::menu.have_an_account') }}? <br> <a data-mdb-toggle="modal"
+                            <p>{{ __('translation::menu.have_an_account') }}? <br> <a class="cursor-pointer" data-mdb-toggle="modal"
                         data-mdb-target="#registerModel">{{ __('translation::menu.create_an_account') }}</a></p>
 
 
@@ -477,7 +480,7 @@ input.qtyminus { width:25px; height:25px;}
 
                             <!-- Password input -->
                             <div class="form-group mb-4">
-                                <input type="password" name = "password" id="form2Example2" class="form-control"
+                                <input type="password" name = "password" id="form2Example2" class="form-control cursor-pointer"
                                     placeholder="Create a Password" />
                             </div>
 
@@ -486,9 +489,9 @@ input.qtyminus { width:25px; height:25px;}
                             <!-- <button type="submit" class="btn btn-primary btn-block mb-4 py-3">Register <i
                                     class="fas fa-arrow-right-long"></i> -->
                             <!-- </button> -->
-                                     <button type="submit" class="btn btn-primary" data-mdb-toggle="modal"
+                                     <button type="submit" class="btn btn-primary cursor-pointer" data-mdb-toggle="modal"
                         data-mdb-target="#registerModel">{{ __('translation::menu.register') }}</button>
-                            <p>{{ __('translation::menu.have_an_account') }}? <br> <a data-mdb-toggle="modal"
+                            <p>{{ __('translation::menu.have_an_account') }}? <br> <a class="cursor-pointer" data-mdb-toggle="modal"
                         data-mdb-target="#loginModel">{{ __('translation::menu.login') }}</a></p>
 
 
