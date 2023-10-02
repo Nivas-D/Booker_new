@@ -277,8 +277,28 @@ input.qtyminus { width:25px; height:25px;}
                 </ul>
                 @if(\Auth::check())
                 <div class="col-md-3 text-end">
-                    <h5>Welcome, 
-                        <a href="{{ route('user/dashboard') }}" >{{Auth::user()->first_name}} {{Auth::user()->last_name}}</a></h5>
+                    <!-- <h5>Welcome, 
+                        <a href="{{ route('user/dashboard') }}" >{{Auth::user()->first_name}} {{Auth::user()->last_name}}</a></h5> -->
+                        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            Welcome, {{ Auth::user()->name }}
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a  class="dropdown-item" href="{{ route('user/dashboard') }}" >Dashboard</a>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                </ul>
 
                 </div>
                 @else

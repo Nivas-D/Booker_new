@@ -119,7 +119,7 @@ Route::group(['middleware' => ['auth','roles:admin,superadmin']], function () {
     Route::resource('admin/inventory', InventoryController::class);
     Route::post('admin/inventory', [InventoryController::class, 'index'])->name('inventory.index');    
 });
-Route::group(['middleware' => ['auth','roles:owner']], function () {
+Route::group(['middleware' => ['auth','roles:owner,business']], function () {
     Route::get('owner/dashboard', [OwnerController::class, 'dashboard'])->name('owner/dashboard');
     Route::get('owner/profile', [OwnerController::class, 'profile'])->name('owner.profile');
     Route::resource('owner/products', App\Http\Controllers\Owner\ProductController::class, ['as' => 'owner']);
