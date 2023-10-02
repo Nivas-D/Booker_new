@@ -464,11 +464,11 @@ input.qtyminus { width:auto; height:auto;}
                                <form method="post" action="{{ route('register') }}" >
                             @csrf
                             <!-- Email input -->
-                            <div class="form-group d-flex mb-4">
-                                <div class="col-6 px-3 row">
+                            <div class="form-group d-flex mb-4 row">
+                                <div class="col-6">
                                     <input type="text" name="first_name" class="form-control" placeholder="First name">
                                 </div>
-                                <div class="col-6 px-3">
+                                <div class="col-6">
                                     <input type="text" name="last_name" class="form-control" placeholder="Last name">
                                 </div>
                             </div>

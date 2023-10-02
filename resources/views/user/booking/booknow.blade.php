@@ -378,15 +378,15 @@
                             alt="cardriving" />
                         <div class="card-body">
                             <div class="d-flex flex-wrap">
-                                <div class="col-9">
-                                    <h5 class="card-title">{{$productcollection->name}}</h5>
+                                <div class="col-12">
+                                    <h5 class="card-title" style="font-size:initial;">{{$productcollection->name}}</h5>
                                 </div>
 
 
                             </div>
 
 
-                            <div class="buy d-flex justify-content-between align-items-center">
+                            <div class="">
                                 <div class="price text-success">
                                     <del class="fw-600 opacity-50 ">
                                         {{$productcollection->price_original}} CHF
@@ -400,10 +400,10 @@
                                       <input type='button' value='+' class='btn qtyplus plus' field='quantity' style="background-color: #e43f52;color: #ffff;border-radius: 5px;" />
                                    
 
-                                 <div   >
-                                      <a href="#"  onclick="addToCart({{$productcollection}})" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i>Cart</a>
-                                 <a href="{{route('booking.booking_personal_info')}}" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i> Buy</a>
-                                 </div>
+                                <div>
+                                    <a href="#"  onclick="addToCart({{$productcollection}})" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i>Cart</a>
+                                    <a href="{{route('booking.booking_personal_info')}}" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i> Buy</a>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -480,15 +480,15 @@
                             alt="cardriving" />
                         <div class="card-body">
                             <div class="d-flex flex-wrap">
-                                <div class="col-9">
-                                    <h5 class="card-title">{{$productcollection->name}}</h5>
+                                <div class="col-12">
+                                    <h5 class="card-title" style="font-size:initial;">{{$productcollection->name}}</h5>
                                 </div>
 
 
                             </div>
 
 
-                            <div class="buy d-flex justify-content-between align-items-center">
+                            <div class="">
                                 <div class="price text-success">
                                     <del class="fw-600 opacity-50 ">
                                         {{$productcollection->price_original}} CHF
@@ -503,10 +503,10 @@
                                       <input type='button' value='+' class='btn qtyplus plus' field='quantity' style="background-color: #e43f52;color: #ffff;border-radius: 5px;" />
                                    
 
-                                 <div style="display:flex;justify-content: space-between;"  >
-                                      <a href="#"  onclick="addToCart({{$productcollection}})" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i>Cart</a>
-                                 <a href="{{route('booking.booking_personal_info')}}" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i> Buy</a>
-                                 </div>
+                                <div>
+                                    <a href="#"  onclick="addToCart({{$productcollection}})" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i>Cart</a>
+                                    <a href="{{route('booking.booking_personal_info')}}" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i> Buy</a>
+                                </div>
                         </div>
                     </div>
                 </div>
