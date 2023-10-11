@@ -14,6 +14,7 @@ use App\Models\User;
 use URL;
 use Mail;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller {
     // public function __construct()
@@ -75,6 +76,14 @@ class PageController extends Controller {
     }
 
     public function book_now($id){
+
+        // $user = Auth::user();        
+        // if($user->role === 'admin' || $user->role === 'superadmin'){
+        //     return redirect('admin/dashboard');
+        // }else if($user->role === 'owner' || $user->role === 'business'){
+        //     return redirect('owner/dashboard');
+        // }
+
         $category = Category::get();
         $product = Product::orderBy('created_at', 'desc')->where('active', 'yes')->get();
         $services= Service::where('status', 1)->where('category_id',$id)

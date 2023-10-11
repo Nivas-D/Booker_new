@@ -25,35 +25,40 @@ Route::get('about', [PageController::class, 'about'])->name('public.about');
 Route::get('faq', [PageController::class, 'faq'])->name('public.faq');
 Route::get('categories', [PageController::class, 'categories'])->name('public.categories');
 Route::get('industries', [PageController::class, 'industries'])->name('public.industries');
-Route::get('book-now/{id}', [PageController::class, 'book_now'])->name('booking.book_now');
-Route::get('bookcategory/{id}', [PageController::class, 'bookcategory'])->name('booking.bookcategory');
-Route::get('book-appointment/{id}', [PageController::class, 'book_appointment'])->name('booking.book_appointment');
-Route::get('products', [PageController::class, 'products'])->name('public.products');
-Route::get('services', [PageController::class, 'services'])->name('public.services');
-Route::get('contact', [PageController::class, 'contact'])->name('public.contact');
-Route::post('contact/post', [PageController::class, 'contactAction'])->name('public.contactpost');
-// Route::get('faq', [PageController::class, 'faq'])->name('public.faq');
-Route::get('booking-personal-info', [PageController::class, 'booking_personal_info'])->name('booking.booking_personal_info');
-Route::get('checkout', [PageController::class, 'checkout'])->name('booking.checkout');
-Route::get('order-confirmation', [PageController::class, 'order_confirmation'])->name('booking.order_confirmation');
-Route::get('create-stripe-intent', [PageController::class, 'create_stripe_intent'])->name('create-stripe-intent');
-Route::post('create-order', [PageController::class, 'create_order'])->name('create-order');
-// Route::get('stripe-return-url', [PageController::class, 'stripe_return_url'])->name('stripe-return-url');
-Route::post('add-to-cart', [PageController::class, 'add_to_cart'])->name('add-to-cart');
-Route::get('remove-cart-item/{id}', [PageController::class, 'remove_cart_item'])->name('remove_cart_item');
-//Route::get('/', 'Auth\LoginController@showLoginForm')->name('welcome');
-Route::post('/get_collaboratera', [PageController::class, 'get_collaboratera'])->name('get-collaboratera');
+Route::get('business/login', [BusinessController::class, 'login'])->name('business.login');
+Route::resource('business', BusinessController::class)->names([
+        'index' => 'business.index',
+    ]);
 
-Route::post('get_appointment', [PageController::class, 'get_appointment'])->name('get-appointment');
+Route::group(['middleware' => ['auth','roles:user']], function () {
+    Route::get('book-now/{id}', [PageController::class, 'book_now'])->name('booking.book_now');
+    Route::get('bookcategory/{id}', [PageController::class, 'bookcategory'])->name('booking.bookcategory');
+    Route::get('book-appointment/{id}', [PageController::class, 'book_appointment'])->name('booking.book_appointment');
+    Route::get('products', [PageController::class, 'products'])->name('public.products');
+    Route::get('services', [PageController::class, 'services'])->name('public.services');
+    Route::get('contact', [PageController::class, 'contact'])->name('public.contact');
+    Route::post('contact/post', [PageController::class, 'contactAction'])->name('public.contactpost');
+    // Route::get('faq', [PageController::class, 'faq'])->name('public.faq');
+    Route::get('booking-personal-info', [PageController::class, 'booking_personal_info'])->name('booking.booking_personal_info');
+    Route::get('checkout', [PageController::class, 'checkout'])->name('booking.checkout');
+    Route::get('order-confirmation', [PageController::class, 'order_confirmation'])->name('booking.order_confirmation');
+    Route::get('create-stripe-intent', [PageController::class, 'create_stripe_intent'])->name('create-stripe-intent');
+    Route::post('create-order', [PageController::class, 'create_order'])->name('create-order');
+    // Route::get('stripe-return-url', [PageController::class, 'stripe_return_url'])->name('stripe-return-url');
+    Route::post('add-to-cart', [PageController::class, 'add_to_cart'])->name('add-to-cart');
+    Route::get('remove-cart-item/{id}', [PageController::class, 'remove_cart_item'])->name('remove_cart_item');
+    //Route::get('/', 'Auth\LoginController@showLoginForm')->name('welcome');
+    Route::post('/get_collaboratera', [PageController::class, 'get_collaboratera'])->name('get-collaboratera');
+    Route::post('get_appointment', [PageController::class, 'get_appointment'])->name('get-appointment');
+});
+
+
 Route::post('check-valid-email', [PageController::class, 'check_valid_email'])->name('check-valid-email');
 Route::post('send-resetpassword-email', [PageController::class, 'send_resetpassword_email'])->name('send-resetpassword-email');
 Route::get('reset-password-email/{id}', [PageController::class, 'reset_password_email'])->name('reset-password-email');
 Route::post('reset-password-ajax', [PageController::class, 'reset_password_ajax'])->name('reset_password_ajax');
 
-Route::get('business/login', [BusinessController::class, 'login'])->name('business.login');
-Route::resource('business', BusinessController::class)->names([
-    'index' => 'business.index',
-]);
+
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
@@ -61,12 +66,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('admin/permissions', PermissionsController::class);
     Route::resource('users', UserController::class);
     Route::get('home', [HomeController::class, 'index'])->name('home');
-
-
 });
-
-
-
 
 Route::group(config('translation.route_group_config') + ['namespace' => 'JoeDixon\\Translation\\Http\\Controllers'], function ($router) {
     $router->get(config('translation.ui_url'), [LanguageController::class, 'index'])->name('languages.index');
@@ -119,7 +119,7 @@ Route::group(['middleware' => ['auth','roles:admin,superadmin']], function () {
     Route::resource('admin/inventory', InventoryController::class);
     Route::post('admin/inventory', [InventoryController::class, 'index'])->name('inventory.index');    
 });
-Route::group(['middleware' => ['auth','roles:owner,business']], function () {
+Route::group(['middleware' => ['auth','roles:owner,business']], function () {    
     Route::get('owner/dashboard', [OwnerController::class, 'dashboard'])->name('owner/dashboard');
     Route::get('owner/profile', [OwnerController::class, 'profile'])->name('owner.profile');
     Route::resource('owner/products', App\Http\Controllers\Owner\ProductController::class, ['as' => 'owner']);
@@ -137,8 +137,14 @@ Route::group(['middleware' => ['auth','roles:owner,business']], function () {
     Route::resource('owner/orders', App\Http\Controllers\Owner\OrderController::class, ['as' => 'owner']);
     Route::resource('owner/inventory', App\Http\Controllers\Owner\InventoryController::class, ['as' => 'owner']);
 });
-Route::group([], function () {
+
+
+Route::group(['middleware' => ['auth','roles:user']], function () {    
     Route::get('user/dashboard', [UserController::class, 'dashboard'])->name('user/dashboard');
+});   
+
+Route::group([], function () {
+    //Route::get('user/dashboard', [UserController::class, 'dashboard'])->name('user/dashboard');
     Route::get('user/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::resource('user/products', App\Http\Controllers\User\ProductController::class, ['as' => 'user']);
     Route::get('user/product/buy/{id}', [App\Http\Controllers\User\ProductController::class, 'buyProduct' ])->name('user.product.buy');

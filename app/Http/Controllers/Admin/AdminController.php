@@ -7,6 +7,9 @@ use App\Models\Service;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller {
+    public function __construct(){
+        $this->middleware('roles:admin');
+    }
     public function dashboard(){
         $products = Product::orderBy('id', 'desc')
             ->leftjoin('categories', 'categories.id', '=', 'products.category_id')

@@ -19,7 +19,7 @@ class LoginController extends Controller {
         } elseif (in_array($user->role, ['owner'])) {
             return 'owner/dashboard';
         } elseif (in_array($user->role, ['business'])) {
-            return 'business/dashboard';
+            return 'owner/dashboard';
         } else {
             return '/';
         }
