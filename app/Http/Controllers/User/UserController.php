@@ -3,6 +3,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductOrder;
+use App\Models\Cart;
 use App\Http\Controllers\User\ProductController;
 use App\Models\Service;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +25,8 @@ class UserController extends Controller {
             'productOrdersAmount' => DB::table('product_orders')->where('user_id', auth()->id())->sum('amount'),
             'serviceBookingsAmount' => DB::table('service_bookings')->where('user_id', auth()->id())->sum('amount'),
         ];
-        return view('user.dashboard', compact('products', 'services', 'stats'));
+        $myorder = ProductOrder::with('product')->get()->where('user_id', auth()->id());
+        $mycart = Cart::with('product')->get()->where('user_id', auth()->id());
+        return view('user.dashboard.index', compact('products', 'services', 'stats','mycart','myorder'));
     } 
 }

@@ -11,4 +11,8 @@ class ProductOrder extends Model {
 ];
     protected $fillable = ['user_id', 'products','product_id', 'quantity', 'amount', 'order_status','delivery_address','payment_status','payment_method','payment_details','created_at','updated_at'];
     
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 }
