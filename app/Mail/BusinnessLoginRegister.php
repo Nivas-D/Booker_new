@@ -18,9 +18,9 @@ class BusinnessLoginRegister extends Mailable
      *
      * @return void
      */
-    public function __construct($mailData)
+    public function __construct() //$mailData
     {
-        $this->mailData = $mailData;
+        //$this->mailData = $mailData;
     }
 
     /**
@@ -31,7 +31,7 @@ class BusinnessLoginRegister extends Mailable
     public function envelope()
     {   
         return new Envelope(
-            subject: $this->mailData['title'],
+            subject: '',//$this->mailData['title'],
         );
     }
 
@@ -43,7 +43,8 @@ class BusinnessLoginRegister extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.business-login-register',
+            //view: 'emails.business-login-register',
+            view: 'maileclipse::templates.businessloginregister',
         );
     }
 

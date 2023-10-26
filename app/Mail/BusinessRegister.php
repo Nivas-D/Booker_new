@@ -18,9 +18,10 @@ class BusinessRegister extends Mailable
      *
      * @return void
      */
-    public function __construct($mailData)
+    public function __construct() //$mailData
     {
-        $this->mailData = $mailData;
+        //$this->mailData = $mailData;
+        //$mailData = ['name'=>'{{business_name}}','title'=>'']
     }
 
     /**
@@ -31,7 +32,7 @@ class BusinessRegister extends Mailable
     public function envelope()
     {   
         return new Envelope(
-            subject: $this->mailData['title'],
+            subject: 'Business Register',//$this->mailData['title'],
         );
     }
 
@@ -43,7 +44,8 @@ class BusinessRegister extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.business-email',
+            //view: 'emails.business-email',
+            view: 'maileclipse::templates.businessemail',
         );
     }
 

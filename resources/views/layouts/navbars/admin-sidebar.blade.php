@@ -133,6 +133,24 @@
                             <span class="nav-link-text">{{ __('Translation') }}</span>
                         </a>
                     </li>
+
+                    <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-start align-items-center">
+                            <i class="ni ni-ungroup text-primary"></i>
+                            <span class="fa fa-dashboard fa-fw mr-2"></span> 
+
+                            <span class="menu-collapsed"><span class="nav-link-text" style="color: #717171;">Email Configuration</span></span>
+                            <span class="submenu-icon ml-auto"></span>
+                        </div>
+                    </a>
+                    <div id='submenu2' class="collapse sidebar-submenu">
+                       <a href="{{ route('mailableList') }}" class="list-group-item list-group-item-action  text-black" style="padding-left: 50px;"> 
+                            <span class="menu-collapsed" style="color: #6e6ecf;"">Mailables</span>
+                        </a>
+                        <a href="{{ route('templateList') }}" class="list-group-item list-group-item-action  text-black" style="padding-left: 50px;"> 
+                            <span class="menu-collapsed" style="color: #6e6ecf;"">Templates</span>
+                        </a> 
+                    </div>                   
                 </ul>
             </div>
         </div>
