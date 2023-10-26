@@ -401,7 +401,7 @@
                                    
 
                                 <div>
-                                    <a href="#"  onclick="addToCart({{$productcollection}})" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i>Cart</a>
+                                    <a onclick="addToCart({{$productcollection}})" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i>Cart</a>
                                     <a href="{{route('booking.booking_personal_info')}}" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i> Buy</a>
                                 </div>
                         </div>
@@ -504,7 +504,7 @@
                                    
 
                                 <div>
-                                    <a href="#"  onclick="addToCart({{$productcollection}})" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i>Cart</a>
+                                    <a onclick="addToCart({{$productcollection}})" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i>Cart</a>
                                     <a href="{{route('booking.booking_personal_info')}}" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i> Buy</a>
                                 </div>
                         </div>
@@ -596,7 +596,7 @@
 
 <script>
 
-        function addToCart(service){
+    function addToCart(service){
          console.log(service);
         user_id = null;
         qty = $('.quantity-add').val();
@@ -620,7 +620,7 @@
     
     $.ajax({
        type:'POST',
-       url:'/add-to-cart',
+       url:'<?php echo env('APP_URL') ?>/add-to-cart',
        data:CartData,
        success:function(data) {
         swal("Successfully added to cart", "success");
