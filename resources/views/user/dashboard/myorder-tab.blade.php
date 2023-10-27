@@ -57,7 +57,9 @@
             <h6 class="C-order-para">{{$item->order_status}}</h6>
           </div>
           <div>
-            <button class="C-myorder-btn">see more</button>
+            <!-- user/myorders/order/{id} -->
+            <a class="C-myorder-btn" href="{{ route('user/myorders/order', ['id' => base64_encode($item->id)]) }}">see more</a>
+           
           </div>
         </div>
       </div>

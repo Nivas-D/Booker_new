@@ -29,4 +29,10 @@ class UserController extends Controller {
         $mycart = Cart::with('product')->get()->where('user_id', auth()->id());
         return view('user.dashboard.index', compact('products', 'services', 'stats','mycart','myorder'));
     } 
+
+    public function myOrderDetails(Request $request,$id){
+        $orderId = base64_decode($id);
+        $orderDetails = ProductOrder::with('product')->find($orderId);
+        return view('user/orders/order-details', compact('orderDetails'));
+    }
 }
