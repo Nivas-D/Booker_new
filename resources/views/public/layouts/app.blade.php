@@ -1,4 +1,7 @@
- <!DOCTYPE html>
+@php
+    //var_dump($cart_count);
+@endphp
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -52,6 +55,10 @@
     <link href="{{asset('css/custom.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/testimonial.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css" id="theme-opt" />
+
+    <link href="{{asset('css/vendors/icons-1.11.1/font/bootstrap-icons.css')}}" rel="stylesheet" type="text/css" id="theme-opt" />
+    <link href="{{asset('css/calender.css')}}" rel="stylesheet" type="text/css" id="theme-opt" />
+    <link href="{{asset('css/setting-appointment.css')}}" rel="stylesheet" type="text/css" id="theme-opt" />
     <style>
 
 @media screen and (max-width: 992px) {
@@ -284,27 +291,27 @@ input.qtyminus { width:auto; height:auto;}
                     <!-- <h5>Welcome, 
                         <a href="{{ route('user/dashboard') }}" >{{Auth::user()->first_name}} {{Auth::user()->last_name}}</a></h5> -->
                         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Welcome, {{ Auth::user()->name }}
-                        </a>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Welcome, {{ Auth::user()->name }}
+                                </a>
 
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a  class="dropdown-item" href="{{ route('user/dashboard') }}" >Dashboard</a>
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                            </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a  class="dropdown-item" href="{{ route('user/dashboard') }}" >Dashboard</a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                    </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                </ul>
-
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
                 </div>
+                <div class="col-md-1"><a href="{{ route('user/dashboard') }}"><i class="fa" style="font-size:24px">&#xf07a;</i><span> {{ $cart_count[0]->total_items }} </span></a></div>
                 @else
                 <div class="col-md-3 text-end">
                     <a type="button" class="btn btn-outline-primary me-2" data-mdb-toggle="modal"
@@ -429,13 +436,10 @@ input.qtyminus { width:auto; height:auto;}
                             </div>
 
                             <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary btn-block mb-4 py-3 cursor-pointer">{{ __('translation::menu.login') }} <i
+                            <button type="submit" class="btn btn-primary btn-block mb-4 py-3 cursor-pointer" style="width: 93%;">{{ __('translation::menu.login') }} <i
                                     class="fas fa-arrow-right-long"></i>
                             </button>
-                            <p>{{ __('translation::menu.have_an_account') }}? <br> <a class="cursor-pointer" data-mdb-toggle="modal"
-                        data-mdb-target="#registerModel">{{ __('translation::menu.create_an_account') }}</a></p>
-
-
+                            <p>{{ __('translation::menu.have_an_account') }}? <br> <a class="cursor-pointer" data-mdb-toggle="modal" data-mdb-target="#registerModel">{{ __('translation::menu.create_an_account') }}</a></p>
                         </form>
                     </div>
                 </div>

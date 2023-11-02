@@ -49,7 +49,7 @@ $item = $orderDetails;
              <div class="col-lg-3">
                <h4 class="Order_heading">Status - Pack part 2</h4>
                <span class="d-block sub_head_sub d-flex justify-content-start">0/3 effectués</span>
-               <button class="theme_btn mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal"> Choose dates </button>
+               <!-- <button class="theme_btn mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal"> Choose dates </button> -->
              </div>
              <div class="col-lg-12 d-flex justify-content-between">
                <span class="d-block text_style">Subtotal</span>

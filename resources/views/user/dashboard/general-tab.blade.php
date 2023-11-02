@@ -1,3 +1,4 @@
+
 <div class="row">
   <div class="col-lg-12">
     <div class="row">
@@ -74,9 +75,7 @@
           <p class="C-setting-input">City</p>
           <div class="C-setting-input-box ">
             <input type="text" list="browsers" name="browser" id="browser" placeholder="type here" class="C-setting-input-field my-3">
-            <span class="" "="">
-																	<img src=" ./Assets/images/downarrow.svg" alt="">
-            </span>
+            <span class=""><img src=" ./Assets/images/downarrow.svg" alt=""></span>
             <datalist id="browsers">
               <option value="Edge"></option>
               <option value="Firefox"></option>

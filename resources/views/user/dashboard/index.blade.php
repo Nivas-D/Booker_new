@@ -17,18 +17,20 @@
                 <div class="tab-content" id="ex1-content">
                     <div class="tab-pane fade active show" id="general-tab" role="tabpanel" aria-labelledby="general-tab" tabindex="1">
                         @include('user.dashboard.general-tab')
-                    </div>
-                    <div class="tab-pane fade" id="mycart-tab" role="tabpanel" aria-labelledby="mycart-tab" tabindex="2">
-                        @include('user.dashboard.mycart-tab')
-                    </div>
-
-                    <div class="tab-pane fade" id="myorder-tab" role="tabpanel" aria-labelledby="myorder-tab" tabindex="3">
-                        @include('user.dashboard.myorder-tab')
-                    </div>
+                    </div>                                        
                     <div class="tab-pane fade" id="my-appointments-tab" role="tabpanel" aria-labelledby="my-appointments-tab" tabindex="3">
                         @include('user.dashboard.my-appointments-tab')
                     </div>
-                    <div class="tab-pane fade" id="savedlocation-tab" role="tabpanel" aria-labelledby="savedlocation-tab" tabindex="3">
+                    <div class="tab-pane fade" id="myorder-tab" role="tabpanel" aria-labelledby="myorder-tab" tabindex="2">
+                        @include('user.dashboard.myorder-tab')
+                    </div>
+                    <div class="tab-pane fade" id="mycart-tab" role="tabpanel" aria-labelledby="mycart-tab" tabindex="4">
+                        @include('user.dashboard.mycart-tab')
+                    </div>
+                    <div class="tab-pane fade" id="my-mes-formations-tab" role="tabpanel" aria-labelledby="my-mes-formations-tab" tabindex="5">
+                        @include('user.dashboard.mes-formations-tab')
+                    </div>
+                    <div class="tab-pane fade" id="savedlocation-tab" role="tabpanel" aria-labelledby="savedlocation-tab" tabindex="6">
                         @include('user.dashboard.location-tab')
                     </div>
                 </div>

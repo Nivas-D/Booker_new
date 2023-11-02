@@ -35,4 +35,9 @@ class UserController extends Controller {
         $orderDetails = ProductOrder::with('product')->find($orderId);
         return view('user/orders/order-details', compact('orderDetails'));
     }
+    public function myOrderServiceDetails(){
+        // $orderId = base64_decode($id);
+        // $orderDetails = ProductOrder::with('product')->find($orderId);
+        return view('user/orders/order-service-details');
+    }
 }

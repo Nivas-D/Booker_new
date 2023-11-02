@@ -15,6 +15,11 @@ use App\Policies\CategoryPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
+//use Illuminate\Support\Facades\Auth;
+use Auth;
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -41,6 +46,6 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('manage-items', 'App\Policies\UserPolicy@manageItems');
 
-        Gate::define('manage-users', 'App\Policies\UserPolicy@manageUsers');
+        Gate::define('manage-users', 'App\Policies\UserPolicy@manageUsers');        
     }
 }

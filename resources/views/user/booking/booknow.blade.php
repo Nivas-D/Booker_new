@@ -624,6 +624,7 @@
        data:CartData,
        success:function(data) {
         swal("Successfully added to cart", "success");
+        location.reload();
          // $("#msg").html(data.msg);
        }
     });

@@ -142,6 +142,7 @@ Route::group(['middleware' => ['auth','roles:owner,business']], function () {
 Route::group(['middleware' => ['auth','roles:user']], function () {    
     Route::get('user/dashboard', [UserController::class, 'dashboard'])->name('user/dashboard');
     Route::get('user/myorders/order/{id}', [UserController::class, 'myOrderDetails'])->name('user/myorders/order');
+    Route::get('user/myservice/order', [UserController::class, 'myOrderServiceDetails'])->name('user/myservice/order');
 });   
 
 Route::group([], function () {

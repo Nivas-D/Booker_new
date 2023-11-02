@@ -2,18 +2,22 @@
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" id="tgeneral-tab" data-mdb-toggle="tab" href="#general-tab" role="tab"
                             aria-controls="general-tab" aria-selected="true">General</a>
-                    </li>
+                    </li> 
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="tmy-appointments-tab" data-mdb-toggle="tab" href="#my-appointments-tab" role="tab"
+                            aria-controls="my-appointments-tab" aria-selected="false">My Appointments</a>
+                    </li> 
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="tmyorder-tab" data-mdb-toggle="tab" href="#myorder-tab" role="tab"
+                            aria-controls="myorder-tab" aria-selected="false">My Orders</a>
+                    </li>                                                                         
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="tmycart-tab" data-mdb-toggle="tab" href="#mycart-tab" role="tab"
                             aria-controls="mycart-tab" aria-selected="false">My Cart</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="tmyorder-tab" data-mdb-toggle="tab" href="#myorder-tab" role="tab"
-                            aria-controls="myorder-tab" aria-selected="false">My Orders</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="tmy-appointments-tab" data-mdb-toggle="tab" href="#my-appointments-tab" role="tab"
-                            aria-controls="my-appointments-tab" aria-selected="false">MES FORMATIONS</a>
+                        <a class="nav-link" id="tmy-mes-formations-tab" data-mdb-toggle="tab" href="#my-mes-formations-tab" role="tab"
+                            aria-controls="my-mes-formations-tab" aria-selected="false">MES FORMATIONS</a>
                     </li>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="tsavedlocation-tab" data-mdb-toggle="tab" href="#savedlocation-tab" role="tab"
