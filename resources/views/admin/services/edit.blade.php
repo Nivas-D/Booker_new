@@ -122,6 +122,10 @@
                                         <label class="form-control-label" for="input-name">{{ __('Duration (In Hours)') }}</label>
                                         <input class="form-control{{ $errors->has('duration') ? ' is-invalid' : '' }}" name="duration" placeholder="{{ __('') }}" type="text" value="{{ old('duration', $service->duration) }}" required>
                                     </div>
+                                    <div class="form-group{{ $errors->has('cancellation_limit') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('Canellation Limit(In Hours)') }}</label>
+                                        <input class="form-control{{ $errors->has('cancellation_limit') ? ' is-invalid' : '' }}" name="cancellation_limit" placeholder="{{ __('') }}" type="text" value="{{ old('cancellation_limit', $service->cancellation_limit) }}" required>
+                                    </div>
                                     <div class="form-group">
                                         <label for="image">Current Image</label>
                                         <img src="{{ asset($service->image) }}" height="100" width="100" alt="Service Image" class="img-fluid">

@@ -141,9 +141,8 @@ class PageController extends Controller {
                         <p class="text-muted">
                             <i class="fa-sharp fa-solid fa-location-dot"></i> '.$locationtext.'
                         </p>
-                        <p class="card-text">  Duration : '.$service->duration.' '. $hr. ' <br>
-
-                        </p>
+                        <p class="card-text">  Duration : '.$service->duration.' '. $hr. ' <br></p>
+                        <p class="card-text">  Cancellation Limit : '.$service->cancellation_limit.' '. $hr. ' <br></p>
                         <del class="fw-600 opacity-50 ">
                         '.$service->price_original.'  CHF
                </del>

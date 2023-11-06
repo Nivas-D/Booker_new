@@ -123,8 +123,10 @@ class ServiceController extends Controller {
             'industry_id' => $request->input('industry'),
             'category_id' => $request->input('category'),
             'user_id' => auth()->user()->id,
-            'owner_id' => $request->input('owner')
+            'owner_id' => $request->input('owner'),
+            'cancellation_limit' => $request->input('cancellation_limit')
         ];
+        //print_r($data); exit;
         if($request->file('image')){
             $file= $request->file('image');
             $filename = date('YmdHi').$file->getClientOriginalName();
@@ -135,7 +137,7 @@ class ServiceController extends Controller {
             $data = array_merge($data, ['image' => $filename]);
         }
         $service->update($data);
-        return redirect()->route('services.index')->with('success','Service updated successfully ');
+        return redirect()->route('services.show',compact('service'))->with('success','Service updated successfully ');
     }
 
     public function destroy(Service $service){

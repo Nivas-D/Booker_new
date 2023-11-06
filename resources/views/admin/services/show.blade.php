@@ -15,7 +15,7 @@
                             <ol class="breadcrumb breadcrumb-links">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="{{ route('admin/dashboard') }}">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('products.index') }}">Products</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('services.index') }}">Services</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">View</li>
                             </ol>
                         </nav>
@@ -84,6 +84,10 @@
                                             <tr>
                                                 <td class="text-primary">Duration</td>
                                                 <td class="text-primary">{{ $service->duration }} Hrs</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-primary">Cancellation Limit</td>
+                                                <td class="text-primary">{{ $service->cancellation_limit }} Hrs</td>
                                             </tr>
                                             <tr>
                                                 <td class="text-primary">Image</td>

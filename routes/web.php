@@ -30,26 +30,46 @@ Route::resource('business', BusinessController::class)->names([
         'index' => 'business.index',
     ]);
 
+Route::get('book-now/{id}', [PageController::class, 'book_now'])->name('booking.book_now');
+Route::get('bookcategory/{id}', [PageController::class, 'bookcategory'])->name('booking.bookcategory');
+Route::get('book-appointment/{id}', [PageController::class, 'book_appointment'])->name('booking.book_appointment');
+Route::get('products', [PageController::class, 'products'])->name('public.products');
+Route::get('services', [PageController::class, 'services'])->name('public.services');
+Route::get('contact', [PageController::class, 'contact'])->name('public.contact');
+Route::post('contact/post', [PageController::class, 'contactAction'])->name('public.contactpost');
+// Route::get('faq', [PageController::class, 'faq'])->name('public.faq');
+Route::get('booking-personal-info', [PageController::class, 'booking_personal_info'])->name('booking.booking_personal_info');
+Route::get('checkout', [PageController::class, 'checkout'])->name('booking.checkout');
+Route::get('order-confirmation', [PageController::class, 'order_confirmation'])->name('booking.order_confirmation');
+Route::get('create-stripe-intent', [PageController::class, 'create_stripe_intent'])->name('create-stripe-intent');
+Route::post('create-order', [PageController::class, 'create_order'])->name('create-order');
+// Route::get('stripe-return-url', [PageController::class, 'stripe_return_url'])->name('stripe-return-url');
+Route::post('add-to-cart', [PageController::class, 'add_to_cart'])->name('add-to-cart');
+Route::get('remove-cart-item/{id}', [PageController::class, 'remove_cart_item'])->name('remove_cart_item');
+//Route::get('/', 'Auth\LoginController@showLoginForm')->name('welcome');
+Route::post('/get_collaboratera', [PageController::class, 'get_collaboratera'])->name('get-collaboratera');
+Route::post('get_appointment', [PageController::class, 'get_appointment'])->name('get-appointment');
+
 Route::group(['middleware' => ['auth','roles:user']], function () {
-    Route::get('book-now/{id}', [PageController::class, 'book_now'])->name('booking.book_now');
-    Route::get('bookcategory/{id}', [PageController::class, 'bookcategory'])->name('booking.bookcategory');
-    Route::get('book-appointment/{id}', [PageController::class, 'book_appointment'])->name('booking.book_appointment');
-    Route::get('products', [PageController::class, 'products'])->name('public.products');
-    Route::get('services', [PageController::class, 'services'])->name('public.services');
-    Route::get('contact', [PageController::class, 'contact'])->name('public.contact');
-    Route::post('contact/post', [PageController::class, 'contactAction'])->name('public.contactpost');
-    // Route::get('faq', [PageController::class, 'faq'])->name('public.faq');
-    Route::get('booking-personal-info', [PageController::class, 'booking_personal_info'])->name('booking.booking_personal_info');
-    Route::get('checkout', [PageController::class, 'checkout'])->name('booking.checkout');
-    Route::get('order-confirmation', [PageController::class, 'order_confirmation'])->name('booking.order_confirmation');
-    Route::get('create-stripe-intent', [PageController::class, 'create_stripe_intent'])->name('create-stripe-intent');
-    Route::post('create-order', [PageController::class, 'create_order'])->name('create-order');
-    // Route::get('stripe-return-url', [PageController::class, 'stripe_return_url'])->name('stripe-return-url');
-    Route::post('add-to-cart', [PageController::class, 'add_to_cart'])->name('add-to-cart');
-    Route::get('remove-cart-item/{id}', [PageController::class, 'remove_cart_item'])->name('remove_cart_item');
-    //Route::get('/', 'Auth\LoginController@showLoginForm')->name('welcome');
-    Route::post('/get_collaboratera', [PageController::class, 'get_collaboratera'])->name('get-collaboratera');
-    Route::post('get_appointment', [PageController::class, 'get_appointment'])->name('get-appointment');
+    // Route::get('book-now/{id}', [PageController::class, 'book_now'])->name('booking.book_now');
+    // Route::get('bookcategory/{id}', [PageController::class, 'bookcategory'])->name('booking.bookcategory');
+    // Route::get('book-appointment/{id}', [PageController::class, 'book_appointment'])->name('booking.book_appointment');
+    // Route::get('products', [PageController::class, 'products'])->name('public.products');
+    // Route::get('services', [PageController::class, 'services'])->name('public.services');
+    // Route::get('contact', [PageController::class, 'contact'])->name('public.contact');
+    // Route::post('contact/post', [PageController::class, 'contactAction'])->name('public.contactpost');
+    // // Route::get('faq', [PageController::class, 'faq'])->name('public.faq');
+    // Route::get('booking-personal-info', [PageController::class, 'booking_personal_info'])->name('booking.booking_personal_info');
+    // Route::get('checkout', [PageController::class, 'checkout'])->name('booking.checkout');
+    // Route::get('order-confirmation', [PageController::class, 'order_confirmation'])->name('booking.order_confirmation');
+    // Route::get('create-stripe-intent', [PageController::class, 'create_stripe_intent'])->name('create-stripe-intent');
+    // Route::post('create-order', [PageController::class, 'create_order'])->name('create-order');
+    // // Route::get('stripe-return-url', [PageController::class, 'stripe_return_url'])->name('stripe-return-url');
+    // Route::post('add-to-cart', [PageController::class, 'add_to_cart'])->name('add-to-cart');
+    // Route::get('remove-cart-item/{id}', [PageController::class, 'remove_cart_item'])->name('remove_cart_item');
+    // //Route::get('/', 'Auth\LoginController@showLoginForm')->name('welcome');
+    // Route::post('/get_collaboratera', [PageController::class, 'get_collaboratera'])->name('get-collaboratera');
+    // Route::post('get_appointment', [PageController::class, 'get_appointment'])->name('get-appointment');
 });
 
 
