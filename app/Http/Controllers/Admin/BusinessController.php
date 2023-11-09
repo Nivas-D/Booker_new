@@ -75,7 +75,7 @@ class BusinessController extends Controller {
                 "name" => $business->company_name,
                 "email" => $business->email,
                 "password" => $password,
-                "link" => "http://bookertest.aryvart.com/business/login",//URL::to('/');
+                "link" => "https://bookertest.bestkaam.com/business/login",//URL::to('/');
                 "title" => "Approval confirmation",
             ];
             $isEmailed = Mail::to($business->email)->send(

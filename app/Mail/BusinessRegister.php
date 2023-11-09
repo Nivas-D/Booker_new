@@ -18,9 +18,9 @@ class BusinessRegister extends Mailable
      *
      * @return void
      */
-    public function __construct() //$mailData
+    public function __construct($mailData)
     {
-        //$this->mailData = $mailData;
+        $this->mailData = $mailData;
         //$mailData = ['name'=>'{{business_name}}','title'=>'']
     }
 

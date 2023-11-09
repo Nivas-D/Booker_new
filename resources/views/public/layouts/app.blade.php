@@ -255,7 +255,7 @@ input.qtyminus { width:auto; height:auto;}
 </style>
 @stack('front-css')
 </head>
-<body>
+<body style="font-family:Poppins !important ;">
     <?php $getLocale = ''; if(!isset($page)){
        $page = '';
       
@@ -272,64 +272,64 @@ input.qtyminus { width:auto; height:auto;}
         </div>
     @endif
 
-
-        <div class="container">
-            <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3">
-                <div class="col-md-1 mb-2 mb-md-0">
-                    <a href="{{route('public.home')}}" class="d-inline-flex link-body-emphasis text-decoration-none">
-                        <img src="{{asset('images/img/logo.png')}}">
-                    </a>
-                </div>
-
-                <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-3 ">{{ __('translation::menu.about') }}</a></li>
-                    <li><a href="{{route('public.categories')}}"  class="nav-link px-3  @if($page == 'industries')link-secondary @endif">Industries</a></li>
-                    <li><a href="{{ route('business.index') }}" class="nav-link px-3 @if($page == 'business')link-secondary @endif">{{ __('translation::menu.business') }}</a></li>
+    <!-- Nav Bar start  -->
+    <nav class="navbar navbar-expand-lg nav_height">
+        <div class="container nav_bg">
+            <a class="navbar-brand" href="{{route('public.home')}}"><img src="{{asset('images/img/logo.png')}}"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link Nav_Menu" aria-current="page" href="#">{{ __('translation::menu.about') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('public.categories')}}"  class="nav-link Nav_Menu @if($page == 'industries') Nav_Menu_active @endif">Industries</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('business.index') }}" class="nav-link Nav_Menu @if($page == 'business') Nav_Menu_active @endif">{{ __('translation::menu.business') }}</a>
+                    </li>
                 </ul>
-                @if(\Auth::check())
-                <div class="col-md-3 text-end">
-                    <!-- <h5>Welcome, 
-                        <a href="{{ route('user/dashboard') }}" >{{Auth::user()->first_name}} {{Auth::user()->last_name}}</a></h5> -->
-                        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Welcome, {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a  class="dropdown-item" href="{{ route('user/dashboard') }}" >Dashboard</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
+                <div class="d-flex" role="search">
+                    @if(\Auth::check())
+                    <div class="col-md-12 text-end">
+                        <!-- <h5>Welcome, 
+                            <a href="{{ route('user/dashboard') }}" >{{Auth::user()->first_name}} {{Auth::user()->last_name}}</a></h5> -->
+                            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Welcome, {{ Auth::user()->name }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        </ul>
-                </div>
-                <div class="col-md-1"><a href="{{ route('user/dashboard') }}"><i class="fa" style="font-size:24px">&#xf07a;</i><span> {{ $cart_count[0]->total_items }} </span></a></div>
-                @else
-                <div class="col-md-3 text-end">
-                    <a type="button" class="btn btn-outline-primary me-2" data-mdb-toggle="modal"
-                        data-mdb-target="#loginModel">{{ __('translation::menu.login') }}</a>
-                    <button type="button" class="btn btn-primary" data-mdb-toggle="modal"
-                        data-mdb-target="#registerModel">{{ __('translation::menu.register') }}</button>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a  class="dropdown-item" href="{{ route('user/dashboard') }}" >Dashboard</a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                        </a>
 
-                </div>
-                @endif
-
-
-                <div class="col-md-1 px-2">
-                    <div class="dropdown country-drop">
-                        <a class="dropdown-toggle" href="#" id="Dropdown" role="button" data-mdb-toggle="dropdown"
-                            aria-expanded="false">
-                            <?php
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            </ul>
+                    </div>
+                    @else
+                    <button class="Nav_btn Btn_1 me-2" data-mdb-toggle="modal" data-mdb-target="#loginModel">{{ __('translation::menu.login') }}</button>
+                    <button class="Nav_btn Btn_2 me-2" data-mdb-toggle="modal" data-mdb-target="#registerModel">{{ __('translation::menu.register') }}</button>
+                    @endif
+                    <div>
+                        <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          <!-- <img src="./Assets/images/flag.png" alt="" /> -->
+                          <?php
                             if(config('app.locale') === 'en'){
                             ?>
+                                <!-- <img src="{{asset('images/flag.png')}}" class="img-fluid"> --> 
                                 <i class="flag-united-kingdom flag m-0"></i>
                             <?php
                             }else{
@@ -337,10 +337,10 @@ input.qtyminus { width:auto; height:auto;}
                                 <i class="flag-france flag m-0"></i>
                             <?php
                             }
-                            ?>                            
+                            ?>
                         </a>
-
-                        <ul class="dropdown-menu" aria-labelledby="Dropdown">
+                        <div class="dropdown DD_style dropstart">            
+                          <ul class="dropdown-menu" aria-labelledby="Dropdown">
                             <?php
                             if(config('app.locale') === 'en'){
                             ?>
@@ -388,165 +388,157 @@ input.qtyminus { width:auto; height:auto;}
                             </li> -->
 
                         </ul>
-                    </div>
-                </div>
-
-
-            </header>
-        </div>
-
-        <!-- login model start-->
-        <div class="modal fade" id="loginModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{ __('translation::menu.login') }}</h5>
-                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="d-flex flex-wrap justify-content-center mb-5">
-                            <div class="col-4"><a href="#"><img src="{{asset('images/img/btn-fb.png')}}" class="img-fluid"></a> </div>
-                            <div class="col-4"><a href="#"><img src="{{asset('images/img/btn-google.png')}}" class="img-fluid"></a></div>
-                            <div class="col-4"><a href="#"><img src="{{asset('images/img/btn-apple.png')}}" class="img-fluid"></a> </div>
                         </div>
-                       <form  method="post" action="{{route('login')}}">
-                            @csrf
-                            <!-- Email input -->
-                            <div class="form-group mb-4">
-                                <input type="email" name="email" id="form2Example1" class="form-control"
-                                    placeholder="Email Address" />
-                            </div>
-
-                            <!-- Password input -->
-                            <div class="form-group mb-4">
-                                <input type="password"  name="password" id="form2Example2" class="form-control" placeholder="Password" />
-                            </div>
-
-                            <!-- 2 column grid layout for inline styling -->
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <!-- Simple link -->
-                                    <a data-mdb-toggle="modal"
-                            data-mdb-target="#forgotpwdModel" class="cursor-pointer">{{ __('translation::menu.forgot_password') }}?</a>
-                                </div>
-                            </div>
-                            <div class="success-email-text" style="display:none;">
-                                Si cette adresse e-mail est enregistrée dans notre boutique, vous recevrez un lien pour réinitialiser votre mot de passe sur info@gmail.com.
-
-                            </div>
-
-                            <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary btn-block mb-4 py-3 cursor-pointer" style="width: 93%;">{{ __('translation::menu.login') }} <i
-                                    class="fas fa-arrow-right-long"></i>
-                            </button>
-                            <p>{{ __('translation::menu.have_an_account') }}? <br> <a class="cursor-pointer" data-mdb-toggle="modal" data-mdb-target="#registerModel">{{ __('translation::menu.create_an_account') }}</a></p>
-                        </form>
                     </div>
-                </div>
-
-            </div>
-        </div>
-        </div>
-        <!-- login model end -->
-
-
-
-        <!-- Register model start-->
-        <div class="modal fade" id="registerModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{ __('translation::menu.register') }}</h5>
-                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="d-flex flex-wrap justify-content-center mb-5">
-                            <div class="col-4"><a href="#"><img src="{{asset('images/img/btn-fb.png')}}" class="img-fluid"></a> </div>
-                            <div class="col-4"><a href="#"><img src="{{asset('images/img/btn-google.png')}}" class="img-fluid"></a></div>
-                            <div class="col-4"><a href="#"><img src="{{asset('images/img/btn-apple.png')}}" class="img-fluid"></a> </div>
-                        </div>
-
-                               <form method="post" action="{{ route('register') }}" >
-                            @csrf
-                            <!-- Email input -->
-                            <div class="form-group d-flex mb-4 row">
-                                <div class="col-6">
-                                    <input type="text" name="first_name" class="form-control" placeholder="First name">
-                                </div>
-                                <div class="col-6">
-                                    <input type="text" name="last_name" class="form-control" placeholder="Last name">
-                                </div>
-                            </div>
-
-                            <div class="form-group mb-4">
-                                <input type="email" name = "email"id="form2Example1" class="form-control"
-                                    placeholder="Email Address" />
-                            </div>
-
-                            <!-- Password input -->
-                            <div class="form-group mb-4">
-                                <input type="password" name = "password" id="form2Example2" class="form-control cursor-pointer"
-                                    placeholder="Create a Password" />
-                            </div>
-
-
-                            <!-- Submit button -->
-                            <!-- <button type="submit" class="btn btn-primary btn-block mb-4 py-3">Register <i
-                                    class="fas fa-arrow-right-long"></i> -->
-                            <!-- </button> -->
-                                     <button type="submit" class="btn btn-primary cursor-pointer" data-mdb-toggle="modal"
-                        data-mdb-target="#registerModel">{{ __('translation::menu.register') }}</button>
-                            <p>{{ __('translation::menu.have_an_account') }}? <br> <a class="cursor-pointer" data-mdb-toggle="modal"
-                        data-mdb-target="#loginModel">{{ __('translation::menu.login') }}</a></p>
-
-
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        </div>
-        <!-- Register model end -->
-
-
-        <div class="bg-light py-3 p-3">
-            <div class="container-xxl">
-                <div class="container">
-
-                    <div class="d-flex float-right">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search"
-                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <span class="input-group-text btn-primary" id="basic-addon2"> <i
-                                            class="fas fa-search"></i></span>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        {{-- <div class="col-6 px-3">
-                            <div class="btn-group sort-btn choose-filters">
-                                <button class="btn btn-default" type="button" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">Choose Filters</button>
-                                <button class="btn" data-sort="none"><i class="fa fa-sort"></i></button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#" tabindex="-1" data-type="option1">Option 1</a></li>
-                                    <li><a href="#" tabindex="-1" data-type="option2">Option 2</a></li>
-                                </ul>
-                            </div>
-
-                        </div> --}}
-
-                    </div>
-
-
-
                 </div>
             </div>
         </div>
+    </nav>
+    <!-- Nav Bar End  -->
+
+    
+    <!-- nav 2 start  -->
+    <nav class="container-fluid  bg_color_nav_2 py-4">
+        <div class="row container">
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-lg-5"></div>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control search_input ZIndex" placeholder="Search"
+                                aria-label="Search" aria-describedby="basic-addon1" />
+                            <span class="input-group-text bg_search" id="basic-addon1"><i
+                                    class="bi bi-search px-2"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-lg-4 text-center">
+                <select class="form-select w-75_css select_style" aria-label="Default select example">
+                    <option selected>Choose filters</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div> -->
+        </div>
+    </nav>
+    <!-- nav 2 end  -->    
+
+    <!-- login model start-->
+    <div class="modal fade" id="loginModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('translation::menu.login') }}</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-wrap justify-content-center mb-5">
+                        <div class="col-4"><a href="#"><img src="{{asset('images/img/btn-fb.png')}}" class="img-fluid"></a> </div>
+                        <div class="col-4"><a href="#"><img src="{{asset('images/img/btn-google.png')}}" class="img-fluid"></a></div>
+                        <div class="col-4"><a href="#"><img src="{{asset('images/img/btn-apple.png')}}" class="img-fluid"></a> </div>
+                    </div>
+                   <form  method="post" action="{{route('login')}}">
+                        @csrf
+                        <!-- Email input -->
+                        <div class="form-group mb-4">
+                            <input type="email" name="email" id="form2Example1" class="form-control"
+                                placeholder="Email Address" />
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-group mb-4">
+                            <input type="password"  name="password" id="form2Example2" class="form-control" placeholder="Password" />
+                        </div>
+
+                        <!-- 2 column grid layout for inline styling -->
+                        <div class="row mb-4">
+                            <div class="col">
+                                <!-- Simple link -->
+                                <a data-mdb-toggle="modal"
+                        data-mdb-target="#forgotpwdModel" class="cursor-pointer">{{ __('translation::menu.forgot_password') }}?</a>
+                            </div>
+                        </div>
+                        <div class="success-email-text" style="display:none;">
+                            Si cette adresse e-mail est enregistrée dans notre boutique, vous recevrez un lien pour réinitialiser votre mot de passe sur info@gmail.com.
+
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary btn-block mb-4 py-3 cursor-pointer" style="width: 93%;">{{ __('translation::menu.login') }} <i
+                                class="fas fa-arrow-right-long"></i>
+                        </button>
+                        <p>{{ __('translation::menu.have_an_account') }}? <br> <a class="cursor-pointer" data-mdb-toggle="modal" data-mdb-target="#registerModel">{{ __('translation::menu.create_an_account') }}</a></p>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <!-- login model end -->
+
+
+
+    <!-- Register model start-->
+    <div class="modal fade" id="registerModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('translation::menu.register') }}</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-wrap justify-content-center mb-5">
+                        <div class="col-4"><a href="#"><img src="{{asset('images/img/btn-fb.png')}}" class="img-fluid"></a> </div>
+                        <div class="col-4"><a href="#"><img src="{{asset('images/img/btn-google.png')}}" class="img-fluid"></a></div>
+                        <div class="col-4"><a href="#"><img src="{{asset('images/img/btn-apple.png')}}" class="img-fluid"></a> </div>
+                    </div>
+
+                           <form method="post" action="{{ route('register') }}" >
+                        @csrf
+                        <!-- Email input -->
+                        <div class="form-group d-flex mb-4 row">
+                            <div class="col-6">
+                                <input type="text" name="first_name" class="form-control" placeholder="First name">
+                            </div>
+                            <div class="col-6">
+                                <input type="text" name="last_name" class="form-control" placeholder="Last name">
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <input type="email" name = "email"id="form2Example1" class="form-control"
+                                placeholder="Email Address" />
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-group mb-4">
+                            <input type="password" name = "password" id="form2Example2" class="form-control cursor-pointer"
+                                placeholder="Create a Password" />
+                        </div>
+
+
+                        <!-- Submit button -->
+                        <!-- <button type="submit" class="btn btn-primary btn-block mb-4 py-3">Register <i
+                                class="fas fa-arrow-right-long"></i> -->
+                        <!-- </button> -->
+                                 <button type="submit" class="btn btn-primary cursor-pointer" data-mdb-toggle="modal"
+                    data-mdb-target="#registerModel">{{ __('translation::menu.register') }}</button>
+                        <p>{{ __('translation::menu.have_an_account') }}? <br> <a class="cursor-pointer" data-mdb-toggle="modal"
+                    data-mdb-target="#loginModel">{{ __('translation::menu.login') }}</a></p>
+
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <!-- Register model end -->
+        
     </header>
 
 
@@ -616,7 +608,7 @@ input.qtyminus { width:auto; height:auto;}
                             <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirmation" />
                         </div>
 
-</form>
+                    </form>
 
                         <!-- Submit button -->
                         <button  id="confirmPasswordSubmit"class="btn btn-primary btn-block mb-4 py-3">Changer le mot de passe <i
@@ -665,26 +657,39 @@ input.qtyminus { width:auto; height:auto;}
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> -->
 
 
-    <footer class=" footer">
-        <div class="container pt-3 pb-3">
-            <ul class="nav
-            justify-content-center pb-3">
-                <li class="nav-item"><a href="#" class="px-3">{{ __('translation::menu.about') }}</a></li>
-                <li class="nav-item"><a href="#" class="px-3">{{ __('translation::menu.company') }}</a></li>
-                <li class="nav-item"><a href="#" class="px-3">{{ __('translation::menu.business') }}</a></li>
-                <li class="nav-item"><a href="{{route('public.faq')}}" class="px-3">{{ __('translation::menu.faq') }}</a></li>
-            </ul>
-            <p class="text-center Copyright"> {{ __('translation::menu.copyright') }} &copy; 2023. {{ __('translation::menu.all_right_reserved') }}
-            </p>
-            <div class="text-light">
-                <a href="#" class="text-light p-1"> <i class="fab fa-snapchat"></i> </a>
-                <a href="#" class="text-light p-1"> <i class="fab fa-instagram"></i> </a>
-                <a href="#" class="text-light p-1"> <i class="fab fa-tiktok"></i> </a>
-                <a href="#" class="text-light p-1"> <i class="fab fa-facebook"></i> </a>
+    <!-- Footer start -->
+    <footer>
+        <section class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row text-center">
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg Footer_text">{{ __('translation::menu.about') }}</div>
+                        <div class="col-lg Footer_text">{{ __('translation::menu.company') }}</div>
+                        <div class="col-lg Footer_text" href="{{ route('business.index') }}">{{ __('translation::menu.business') }}</div>
+                        <div class="col-lg Footer_text" href="{{route('public.faq')}}">{{ __('translation::menu.faq') }}</div>
+                        <div class="col-lg-4"></div>
+                    </div>
+                </div>
+                <div class="col-lg-12 mb-4">
+                    <span class="d-block d-flex">
+                        <img src="{{asset('images/Snap.svg')}}" class="img-fluid me-2" alt="" />
+                        <img src="{{asset('images/Instagram.svg')}}" class="img-fluid me-2" alt="" />
+                        <img src="{{asset('images/Tiktok.svg')}}" class="img-fluid me-2" alt="" />
+                        <img src="{{asset('images/Facebook.svg')}}" class="img-fluid me-2" alt="" />
+                    </span>
+                </div>
+                <div class="col-lg-12">
+                    <p class="footer_text_rights text-center">
+                        {{ __('translation::menu.copyright') }} @2023. {{ __('translation::menu.all_right_reserved') }}
+                    </p>
+                </div>
             </div>
-
-        </div>
+        </section>
     </footer>
+    <!-- Footer End -->
+
+    
 
     <!-- Back to top -->
     <a href="#" class="btn btn-icon btn-soft-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>

@@ -215,10 +215,10 @@
 <tbody>
 <tr>
 <td style="padding-bottom: 20px; background-color: #ffffff;" valign="top">
-<p>Hi ,<br /><br /></p>
+<p>Hi {{$mailData['name']}},<br /><br /></p>
 <p>Welcome to Booker! Your account is almost ready for use.</p>
 <p>Here are your account details:</p>
-<p><br />Click here the link here to login your business dashboard <a href="http://bookertest.aryvart.com/business/login" target="_blank" rel="noopener">click here.</a></p>
+<p><br />Click here the link here to login your business dashboard <a href="{{$mailData['link']}}" target="_blank" rel="noopener">click here.</a></p>
 </td>
 </tr>
 <tr>

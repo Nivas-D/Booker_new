@@ -115,7 +115,7 @@ Route::group(['middleware' => ['auth','roles:admin,superadmin']], function () {
     Route::resource('admin/business',  App\Http\Controllers\Admin\BusinessController::class)->names([
         'index' => 'admin.business.index',
     ]);
-    Route::post('admin/business/approve/{id}', [App\Http\Controllers\admin\BusinessController::class, 'approve'])->name('admin.business.approve');
+    Route::post('admin/business/approve/{id}', [App\Http\Controllers\Admin\BusinessController::class, 'approve'])->name('admin.business.approve');
     Route::post('admin/business', [App\Http\Controllers\Admin\BusinessController::class, 'index'])->name('admin.business.index');
     Route::resource('admin/products', ProductController::class);
     Route::post('admin/products', [ProductController::class, 'index'])->name('products.index');
