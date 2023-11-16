@@ -9,6 +9,8 @@ use Validator;
 use Mail;
 use App\Mail\BusinnessLoginRegister;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+
 
 class BusinessController extends Controller {
     
@@ -65,6 +67,7 @@ class BusinessController extends Controller {
                 'email' => $business->email,
                 'role'=>'owner',
                 'role_id' => 3,
+                'email_verified_at' => Carbon::now(), // Manually set email_verified_at
                 'password' => Hash::make($password),
             ]);
             $newUserId = $user->id;

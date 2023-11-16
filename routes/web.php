@@ -18,6 +18,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LanguageTranslationController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\Auth\VerificationController;
 
 Route::get('/', [PageController::class, 'home'])->name('public.home');
 Route::get('home', [PageController::class, 'home'])->name('public.home');
@@ -29,6 +30,7 @@ Route::get('business/login', [BusinessController::class, 'login'])->name('busine
 Route::resource('business', BusinessController::class)->names([
         'index' => 'business.index',
     ]);
+Route::get('email/verify/{token}', [VerificationController::class, 'verify'])->name('verification.verify');
 
 Route::get('book-now/{id}', [PageController::class, 'book_now'])->name('booking.book_now');
 Route::get('bookcategory/{id}', [PageController::class, 'bookcategory'])->name('booking.bookcategory');

@@ -271,6 +271,16 @@ input.qtyminus { width:auto; height:auto;}
             {{ session('success') }}
         </div>
     @endif
+    @if(session('warning'))
+        <div class="alert alert-warning" id="successMessage">
+            {{ session('warning') }}
+        </div>
+    @endif
+    @if(session('error'))
+        <div class="alert alert-error" id="successMessage">
+            {{ session('error') }}
+        </div>
+    @endif
 
     <!-- Nav Bar start  -->
     <nav class="navbar navbar-expand-lg nav_height">
